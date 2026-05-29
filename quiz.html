@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMCI - اختبار تفاعلي</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#14b8a6;--gold:#d4af37;--dark:#0f172a;--light:#cbd5e1;--danger:#CE1126;--success:#7cb342}
+body{font-family:'Cairo',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding-top:180px}
+.flag{display:flex;height:5px;position:fixed;top:0;left:0;right:0;z-index:10001}
+.flag-r{flex:1;background:#CE1126}.flag-w{flex:1;background:#fff}.flag-b{flex:1;background:#000}
+.top-bar{position:fixed;top:5px;left:0;right:0;z-index:10000;background:linear-gradient(180deg,#1a1a2e,#16213e);box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.header{text-align:center;padding:15px}
+.header img{width:70px;margin-bottom:5px}
+.header h1{font-family:'Amiri',serif;color:var(--gold);font-size:1.3rem}
+.nav{display:flex;gap:6px;justify-content:center;padding:8px;background:rgba(0,0,0,0.3);flex-wrap:wrap}
+.nav a{color:var(--gold);text-decoration:none;padding:5px 10px;font-weight:600;font-size:0.8rem;border-radius:8px}
+.container{max-width:800px;margin:auto;padding:20px}
+.quiz-card{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0}
+.quiz-title{color:#5eead4;font-family:'Amiri',serif;font-size:1.3rem}
+.timer{background:var(--danger);color:#fff;padding:8px 16px;border-radius:20px;font-weight:700;font-size:1.1rem}
+.question{font-size:1.1rem;margin:20px 0;line-height:1.8;color:#fff}
+.options{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.option{background:#1a1a2e;border:2px solid rgba(255,255,255,0.1);padding:15px 20px;border-radius:12px;cursor:pointer;transition:0.3s;display:flex;align-items:center;gap:12px}
+.option:hover{border-color:var(--primary);background:rgba(20,184,166,0.1)}
+.option.selected{border-color:var(--primary);background:rgba(20,184,166,0.2)}
+.option.correct{border-color:var(--success);background:rgba(124,179,66,0.2)}
+.option.wrong{border-color:var(--danger);background:rgba(206,17,38,0.2)}
+.option-letter{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--gold)}
+.explanation{background:rgba(20,184,166,0.1);border-right:4px solid var(--primary);padding:15px;border-radius:12px;margin:15px 0;display:none}
+.explanation.show{display:block;animation:fadeIn 0.4s}
+.btn{padding:12px 28px;border-radius:30px;border:none;font-weight:700;cursor:pointer;font-family:'Cairo';font-size:1rem;transition:0.3s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.result-score{font-size:4rem;font-weight:900;color:#5eead4;margin:20px 0}
+.certificate-preview{background:linear-gradient(135deg,#1a1a2e,#0d2b1e);border:2px solid var(--gold);border-radius:20px;padding:30px;margin:20px 0;text-align:center}
+.sig{background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid var(--gold);margin-top:30px}
+.sig span{color:#888;font-size:0.7rem}.sig strong{color:var(--gold)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){body{padding-top:160px}.header h1{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
+<div class="top-bar">
+<div class="header"><img src="images/yemen-eagle.png" alt="Yemen"><h1>✅ اختبار IMCI التفاعلي</h1></div>
+<div class="nav"><a href="/">🏠 الرئيسية</a><a href="/protocol.html">📋 بروتوكولات</a><a href="/decision-tree.html">🌳 تقييم</a></div>
+</div>
+<div class="container" id="quizContainer"></div>
+<div class="sig"><span>🌐 Engineered & Designed by</span><br><strong>Dr. Salah Al-Ahdal</strong></div>
+<script>
+const quizData=[{id:1,question:"طفل عمره 4 شهور، حرارة 39.5°C، <strong>يرفض الرضاعة تماماً</strong>، ما الإجراء الصحيح؟",options:[{text:"أعطه باراسيتامول وأرسله للمنزل",correct:false},{text:"احاله فوراً للمستشفى",correct:true},{text:"انتظر 24 ساعة لمتابعة الحالة",correct:false},{text:"أعطه مضاد حيوي فموي",correct:false}],explanation:"عدم القدرة على الشرب هي <strong>علامة خطر عامة (GDS)</strong> تستوجب الاحالة الفورية.",reference:"WHO IMCI - General Danger Signs"},{id:2,question:"طفل عمره 2 سنة، <strong>سعال وصعوبة تنفس</strong>، RR=55/دقيقة، ما التشخيص؟",options:[{text:"سعال بارد",correct:false},{text:"التهاب رئوي حاد",correct:true},{text:"ربو",correct:false},{text:"جسم غريب",correct:false}],explanation:"للأطفال 1-5 سنوات: RR ≥ 40 = <strong>التهاب رئوي حاد</strong>.",reference:"WHO IMCI - Cough Protocol"},{id:3,question:"طفل 8 شهور، <strong>إسهال دموي</strong> 3 أيام، بدون جفاف، ما العلاج؟",options:[{text:"ORS فقط",correct:false},{text:"ORS + زنك + سيبروفلوكساسين",correct:true},{text:"لوبيراميد",correct:false},{text:"انتظار",correct:false}],explanation:"الإسهال الدموي يحتاج <strong>سيبروفلوكساسين</strong> 3 أيام + <strong>زنك</strong>.",reference:"WHO IMCI - Diarrhea"},{id:4,question:"طفل 3 سنوات، <strong>وذمة ثنائية القدمين</strong>، WFH < -3Z، الإجراء؟",options:[{text:"F100 منزلي",correct:false},{text:"احال فوراً للمستشفى",correct:true},{text:"فيتامين A",correct:false},{text:"ORS",correct:false}],explanation:"الوذمة + WFH < -3Z = <strong>سوء تغذية حاد مع وذمة</strong> طارئ.",reference:"WHO IMCI - Nutrition"},{id:5,question:"طفل 6 شهور، حمى 38°C، <strong>طفح+سعال+احمرار عينين</strong>، الاشتباه؟",options:[{text:"حصبة",correct:true},{text:"حصبة ألمانية",correct:false},{text:"جدري",correct:false},{text:"حمى عادية",correct:false}],explanation:"حمى+طفح+سعال+عيون = <strong>حصبة</strong>. فيتامين A فوراً.",reference:"WHO IMCI - Fever"}];
+let cq=0,score=0,tl=300,ti;
+function startQuiz(){document.getElementById('quizContainer').innerHTML='<div class="quiz-card"><div class="quiz-title">اختبار IMCI</div><div class="timer" id="timer">05:00</div><div id="qa"></div></div>';ti=setInterval(()=>{tl--;let m=String(Math.floor(tl/60)).padStart(2,'0'),s=String(tl%60).padStart(2,'0');document.getElementById('timer').textContent=m+':'+s;if(tl<=0){clearInterval(ti);finishQuiz();}},1000);showQ();}
+function showQ(){let q=quizData[cq];document.getElementById('qa').innerHTML='<div class="question">'+q.question+'</div><div class="options">'+q.options.map((o,i)=>'<div class="option" onclick="sel('+i+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+o.text+'</div></div>').join('')+'</div><div class="explanation" id="ex"><h4>📖 الشرح</h4><p>'+q.explanation+'</p><div style="color:var(--gold);margin-top:10px;">📚 '+q.reference+'</div></div><button class="btn btn-primary" id="nb" onclick="nextQ()" disabled>التالي →</button>';}
+function sel(i){let o=document.querySelectorAll('.option'),q=quizData[cq];o.forEach((e,j)=>{e.classList.remove('selected','correct','wrong');e.onclick=null;if(j===i){e.classList.add('selected');if(q.options[i].correct){e.classList.add('correct');score++;}else{e.classList.add('wrong');o.forEach((x,k)=>{if(q.options[k].correct)x.classList.add('correct');});}}});document.getElementById('ex').classList.add('show');document.getElementById('nb').disabled=false;}
+function nextQ(){cq++;if(cq>=quizData.length){clearInterval(ti);finishQuiz();}else{showQ();}}
+function finishQuiz(){let p=Math.round((score/quizData.length)*100),pass=p>=70,cid='IMCI-'+Date.now().toString(36).toUpperCase();document.getElementById('quizContainer').innerHTML='<div class="quiz-card" style="text-align:center;padding:40px"><h2 style="color:var(--gold)">🎯 النتيجة</h2><div class="result-score" style="color:'+(p>=80?'var(--success)':p>=60?'var(--gold)':'var(--danger)')+'">'+p+'%</div><p>'+ (pass?'🎉 مبروك! ناجح':'⚠️ لم تنجح') +'</p><p>✅ '+score+'/'+quizData.length+' صحيحة</p>'+ (pass?'<div class="certificate-preview"><h3>🏆 شهادة IMCI</h3><div style="background:rgba(212,175,55,0.2);padding:8px 16px;border-radius:20px;display:inline-block;color:var(--gold);">'+cid+'</div><br><a href="certificate.html?id='+cid+'&score='+p+'" class="btn btn-outline" style="margin-top:10px;">📜 عرض الشهادة</a></div>':'') +'<br><a href="/quiz.html" class="btn btn-outline">🔄 إعادة</a> <a href="/" class="btn btn-primary">🏠 الرئيسية</a></div>';}
+startQuiz();
+</script>
+</body>
+</html>

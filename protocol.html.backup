@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMCI - بروتوكولات العلاج</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root { --primary:#14b8a6; --gold:#d4af37; --dark:#0f172a; --light:#cbd5e1; --danger:#CE1126; --warning:#f59e0b; }
+        body { font-family:'Cairo',sans-serif; background:var(--dark); color:#fff; min-height:100vh; }
+        .flag { display:flex; height:5px; }
+        .flag-r { flex:1; background:#CE1126; } .flag-w { flex:1; background:#fff; } .flag-b { flex:1; background:#000; }
+        .header { text-align:center; padding:20px; background:linear-gradient(180deg,#1a1a2e,#16213e); }
+        .header img { width:80px; }
+        .header h1 { font-family:'Amiri',serif; color:var(--gold); font-size:1.5rem; }
+        .container { max-width:900px; margin:auto; padding:20px; }
+        .nav { display:flex; gap:10px; justify-content:center; padding:10px; flex-wrap:wrap; }
+        .nav a { color:var(--gold); text-decoration:none; padding:8px 14px; font-weight:600; border-radius:8px; transition:0.3s; }
+        .nav a:hover { background:rgba(212,175,55,0.15); }
+        
+        .toc { background:#1a1a2e; border-radius:16px; padding:20px; margin:20px 0; border-right:4px solid var(--gold); }
+        .toc h3 { color:var(--gold); margin-bottom:15px; }
+        .toc a { display:block; color:var(--light); text-decoration:none; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); transition:0.3s; }
+        .toc a:hover { color:var(--primary); padding-right:10px; }
+        .toc a::before { content:"📋 "; }
+        
+        .protocol-section { background:rgba(255,255,255,0.06); border-radius:20px; padding:25px; margin:25px 0; scroll-margin-top:20px; }
+        .protocol-section h2 { color:#5eead4; font-family:'Amiri',serif; font-size:1.4rem; margin-bottom:15px; display:flex; align-items:center; gap:10px; }
+        .protocol-section h3 { color:var(--gold); margin:15px 0 10px; font-size:1.1rem; }
+        .protocol-section ul { padding-right:20px; margin:10px 0; }
+        .protocol-section li { margin:8px 0; color:var(--light); line-height:1.8; }
+        .protocol-section .urgent { background:rgba(206,17,38,0.15); border-right:4px solid var(--danger); padding:15px; border-radius:12px; margin:15px 0; }
+        .protocol-section .urgent strong { color:var(--danger); }
+        .protocol-section .treatment { background:rgba(20,184,166,0.15); border-right:4px solid var(--primary); padding:15px; border-radius:12px; margin:15px 0; }
+        .protocol-section .treatment strong { color:var(--primary); }
+        .protocol-section .note { background:rgba(245,158,11,0.15); border-right:4px solid var(--warning); padding:15px; border-radius:12px; margin:15px 0; font-size:0.9rem; }
+        
+        .back-top { position:fixed; bottom:20px; left:20px; background:var(--primary); color:#fff; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; box-shadow:0 4px 15px rgba(0,0,0,0.4); }
+        .sig { background:#0d2b1e; padding:16px; text-align:center; border-top:1px solid var(--gold); margin-top:30px; }
+        .sig span { color:#888; font-size:0.7rem; }
+        .sig strong { color:var(--gold); }
+        @media(max-width:600px){ .protocol-section{padding:15px} }
+    </style>
+</head>
+<body>
+
+<div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
+
+<<header class="header">
+    <img src="images/yemen-eagle.png" alt="Yemen" style="width:80px;">
+    <h1>📋 بروتوكولات IMCI للعلاج</h1>
+    <p style="color:#5eead4;">الرعاية التكاملية لصحة الطفل - WHO 2022</p>
+</header>
+
+<<nav class="nav">
+    <a href="/">🏠 الرئيسية</a>
+    <a href="/decision-tree.html">🌳 شجرة القرارات</a>
+    <a href="/age-calculator.html">🧮 حاسبة العمر</a>
+</nav>
+
+<div class="container">
+
+    <div class="toc">
+        <h3>📑 فهرس البروتوكولات</h3>
+        <a href="#danger">علامات الخطر العامة (GDS)</a>
+        <a href="#cough">بروتوكول السعال / الاختناق</a>
+        <a href="#diarrhea">بروتوكول الإسهال</a>
+        <a href="#fever">بروتوكول الحمى</a>
+        <a href="#malnutrition">بروتوكول التغذية</a>
+        <a href="#anemia">بروتوكول فقر الدم</a>
+    </div>
+
+    <!-- علامات الخطر -->
+    <div class="protocol-section" id="danger">
+        <h2>⚠️ علامات الخطر العامة</h2>
+        <div class="urgent">
+            <strong>🏥 إذا وجدت أي علامة من العلامات التالية → احال فوراً للمستشفى</strong>
+        </div>
+        <ul>
+            <li>عدم قدرة الطفل على الشرب أو الرضاعة</li>
+            <li>نوبات صرع / اختلاجات</li>
+            <li>غيبوبة أو فقدان الوعي / لethargic</li>
+            <li>استفراغ كل شيء (Everything)</li>
+            <li>صعوبة شديدة في التنفس</li>
+        </ul>
+        <div class="treatment">
+            <strong>العلاج أثناء الاحالة:</strong>
+            <ul>
+                <li>أعطِ الطفل جرعة أولى من المضاد الحيوي المناسب</li>
+                <li>عالج الحمى بالباراسيتامول</li>
+                <li>عالج الجفاف بالمحلول ORS (إذا كان واعياً)</li>
+                <li>حافظ على الطفل دافئاً</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- السعال -->
+    <div class="protocol-section" id="cough">
+        <h2>🫁 بروتوكول السعال / الاختناق</h2>
+        <h3>التقييم:</h3>
+        <ul>
+            <li>عدد الأنفاس في الدقيقة (RR): 
+                <br>• < 2 شهر: ≥ 60 | • 2-12 شهر: ≥ 50 | • 1-5 سنة: ≥ 40
+            </li>
+            <li>صداع في الصدر (Chest indrawing)</li>
+            <li>أصوات طبيعية (Stridor)</li>
+        </ul>
+        <div class="urgent">
+            <strong>ذات الرئة الشديدة أو خناجر الرئة → احال فوراً</strong>
+        </div>
+        <div class="treatment">
+            <strong>العلاج:</strong>
+            <ul>
+                <li><strong>الالتهاب الرئوي الحاد:</strong> أمبيسيلين + جينتاميسين (5 أيام)</li>
+                <li><strong>السعال البارد:</strong> لا مضاد حيوي، سوائل وفيتامين A</li>
+                <li><strong>الخناق:</strong> ديكساميثازون + أدرينالين بخاخ</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- الإسهال -->
+    <div class="protocol-section" id="diarrhea">
+        <h2>💧 بروتوكول الإسهال</h2>
+        <h3>تقييم الجفاف:</h3>
+        <ul>
+            <li><strong>جفاف شديد:</strong> عطش شديد، جلد متغضن بطيء، عيون غائرة، لا دموع</li>
+            <li><strong>جفاف بعض:</strong> عطش، جلد متغضن بطيء بعض الشيء</li>
+            <li><strong>لا جفاف:</strong> جلد طبيعي، عيون طبيعية</li>
+        </ul>
+        <div class="urgent">
+            <strong>الجفاف الشديد → احال فوراً مع ORS أثناء الاحالة</strong>
+        </div>
+        <div class="treatment">
+            <strong>العلاج:</strong>
+            <ul>
+                <li><strong>لا جفاف:</strong> ORS 50-100ml بعد كل برازة + استمرار الرضاعة</li>
+                <li><strong>جفاف بعض:</strong> ORS 75ml/kg خلال 4 ساعات في العيادة</li>
+                <li><strong>إسهال دموي:</strong> سيبروفلوكساسين (3 أيام) + زنك (10-14 يوم)</li>
+                <li><strong>زنك:</strong> 10mg يومياً لمدة 10-14 يوماً للأطفال < 6 شهور: 10mg</li>
+            </ul>
+        </div>
+        <div class="note">
+            ⚠️ لا تعطِ أدوية لإيقاف الإسهال (Loperamide) للأطفال!
+        </div>
+    </div>
+
+    <!-- الحمى -->
+    <div class="protocol-section" id="fever">
+        <h2>🌡️ بروتوكول الحمى</h2>
+        <h3>التقييم:</h3>
+        <ul>
+            <li>درجة الحرارة ≥ 37.5°C إبطي أو ≥ 38°C فموي</li>
+            <li>الطفح الجلدي (Measles/Rash)</li>
+            <li>سرفة عنقية (Stiff neck) → سحايا محتملة</li>
+        </ul>
+        <div class="urgent">
+            <strong>حمى مع طفح + سعال + احمرار العينين → احتمال حصبة → احال</strong>
+        </div>
+        <div class="treatment">
+            <strong>العلاج:</strong>
+            <ul>
+                <li><strong>باراسيتامول:</strong> 15mg/kg كل 6 ساعات للحمى ≥ 38.5°C</li>
+                <li><strong>المalaria:</strong> Coartem (Artemether-Lumefantrine) حسب الوزن</li>
+                <li><strong>حصبة:</strong> فيتامين A 100,000-200,000 وحدة فوراً</li>
+                <li><strong>سحايا:</strong> سيفترياكون + احال طارئ</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- التغذية -->
+    <div class="protocol-section" id="malnutrition">
+        <h2>🍎 بروتوكول التغذية</h2>
+        <h3>التقييم:</h3>
+        <ul>
+            <li>الوزن للعمر (WFA) < -2Z → تقزم</li>
+            <li>الوزن للطول (WFH) < -2Z → هزال</li>
+            <li>الوذمة (Bilateral pitting edema) → سوء تغذية حاد مع وذمة</li>
+        </ul>
+        <div class="urgent">
+            <strong>سوء تغذية حاد مع وذمة → احال فوراً</strong>
+        </div>
+        <div class="treatment">
+            <strong>العلاج:</strong>
+            <ul>
+                <li><strong>تقزم/هزال بسيط:</strong> F100 أو RUTF (Plumpy'Nut) + تعليم الأم</li>
+                <li><strong>فيتامين A:</strong> جرعة عالية إذا لم يُعطَ خلال 6 شهور</li>
+                <li><strong>الديدان:</strong> Albendazole (إذا > 1 سنة)</li>
+                <li><strong>الحديد:</strong> 2mg/kg/يوم لمدة 3 شهور</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- فقر الدم -->
+    <div class="protocol-section" id="anemia">
+        <h2>🩸 بروتوكول فقر الدم</h2>
+        <h3>التقييم:</h3>
+        <ul>
+            <li>شحوب كف اليد (Palmar pallor)</li>
+            <li>شحوب الجفن الداخلي (Conjunctival pallor)</li>
+            <li>تعب شديد، نبض سريع</li>
+        </ul>
+        <div class="treatment">
+            <strong>العلاج:</strong>
+            <ul>
+                <li><strong>الحديد:</strong> 2-3mg/kg من العنصر الحديدي، مرتين يومياً × 3 شهور</li>
+                <li><strong>فيتامين C:</strong> مع الحديد لزيادة الامتصاص</li>
+                <li><strong>مكافحة الملاريا:</strong> إذا كانت شائعة في المنطقة</li>
+                <li><strong>تعليم التغذية:</strong> أطعمة غنية بالحديد</li>
+            </ul>
+        </div>
+        <div class="note">
+            ⚠️ فقر الدم الشديد (Hb < 7g/dl) مع علامات قصور القلب → احال
+        </div>
+    </div>
+
+</div>
+
+<a href="#" class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">⬆️</a>
+
+<div class="sig">
+    <span>🌐 Engineered & Designed by</span><br>
+    <strong>Dr. Salah Al-Ahdal</strong><br>
+    <span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+</body>
+</html>

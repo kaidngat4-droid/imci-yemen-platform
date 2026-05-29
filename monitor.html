@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMCI - مراقبة النظام</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#14b8a6;--gold:#d4af37;--dark:#0f172a;--light:#cbd5e1;--danger:#CE1126;--success:#7cb342;--info:#3b82f6}
+body{font-family:'Cairo',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding-top:180px}
+.flag{display:flex;height:5px;position:fixed;top:0;left:0;right:0;z-index:10001}
+.flag-r{flex:1;background:#CE1126}.flag-w{flex:1;background:#fff}.flag-b{flex:1;background:#000}
+.top-bar{position:fixed;top:5px;left:0;right:0;z-index:10000;background:linear-gradient(180deg,#1a1a2e,#16213e);box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.header{text-align:center;padding:15px}
+.header img{width:70px;margin-bottom:5px}
+.header h1{font-family:'Amiri',serif;color:var(--gold);font-size:1.3rem}
+.nav{display:flex;gap:6px;justify-content:center;padding:8px;background:rgba(0,0,0,0.3);flex-wrap:wrap;border-top:1px solid rgba(212,175,55,0.2)}
+.nav a{color:var(--gold);text-decoration:none;padding:5px 10px;font-weight:600;font-size:0.8rem;border-radius:8px}
+.nav a:hover{background:rgba(212,175,55,0.15)}
+
+.container{max-width:1200px;margin:auto;padding:20px}
+
+.monitor-header{background:linear-gradient(135deg,#1a1a2e,#0d2b1e);border-radius:16px;padding:20px;margin:20px 0;text-align:center;border:1px solid rgba(212,175,55,0.3)}
+.monitor-header h2{color:var(--gold);font-family:'Amiri',serif;margin-bottom:10px}
+.monitor-status{display:inline-flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:15px}
+.status-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);padding:8px 16px;border-radius:20px}
+.status-dot{width:10px;height:10px;border-radius:50%;animation:pulse 2s infinite}
+.status-dot.online{background:var(--success)}
+.status-dot.warning{background:var(--gold)}
+.status-dot.danger{background:var(--danger)}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:20px 0}
+
+.monitor-card{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px}
+.monitor-card h3{color:var(--gold);margin-bottom:20px;font-family:'Amiri',serif;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+
+.metric{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.metric:last-child{border-bottom:none}
+.metric-label{color:var(--light);font-size:0.9rem}
+.metric-value{font-weight:700;color:#fff}
+.metric-value.good{color:var(--success)}
+.metric-value.warn{color:var(--gold)}
+.metric-value.bad{color:var(--danger)}
+
+.progress-bar{height:8px;background:#1a1a2e;border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;border-radius:4px;transition:1s}
+.fill-good{background:var(--success)}
+.fill-warn{background:var(--gold)}
+.fill-bad{background:var(--danger)}
+
+.live-feed{max-height:300px;overflow-y:auto}
+.feed-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem;align-items:flex-start}
+.feed-time{color:var(--gold);font-family:monospace;min-width:60px;font-size:0.8rem}
+.feed-icon{font-size:18px}
+.feed-content{flex:1}
+.feed-title{color:#fff;font-weight:600}
+.feed-detail{color:var(--light);font-size:0.8rem;margin-top:2px}
+.feed-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.75rem;margin-top:4px}
+.tag-live{background:rgba(206,17,38,0.2);color:#ef4444}
+.tag-quiz{background:rgba(20,184,166,0.2);color:#5eead4}
+.tag-login{background:rgba(59,130,246,0.2);color:#60a5fa}
+.tag-cert{background:rgba(212,175,55,0.2);color:var(--gold)}
+
+.alert-box{background:rgba(206,17,38,0.1);border:1px solid var(--danger);border-radius:12px;padding:15px;margin:15px 0;display:flex;gap:15px;align-items:center}
+.alert-box.warning{background:rgba(245,158,11,0.1);border-color:var(--warning)}
+.alert-icon{font-size:24px}
+.alert-content{flex:1}
+.alert-title{font-weight:700;color:var(--danger)}
+.alert-box.warning .alert-title{color:var(--warning)}
+.alert-text{color:var(--light);font-size:0.85rem;margin-top:4px}
+
+.device-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+.device-card{background:#1a1a2e;border-radius:12px;padding:15px;text-align:center}
+.device-icon{font-size:30px;margin-bottom:10px}
+.device-name{color:#fff;font-weight:600;font-size:0.9rem}
+.device-status{color:var(--success);font-size:0.8rem;margin-top:5px}
+.device-status.offline{color:var(--danger)}
+
+.sig{background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid var(--gold);margin-top:30px}
+.sig span{color:#888;font-size:0.7rem}
+.sig strong{color:var(--gold)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+@media(max-width:600px){body{padding-top:160px}}
+</style>
+</head>
+<body>
+
+<div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
+
+<div class="top-bar">
+<div class="header">
+<img src="images/yemen-eagle.png" alt="Yemen">
+<h1>📡 مراقبة النظام</h1>
+</div>
+<div class="nav">
+<a href="/">🏠 الرئيسية</a>
+<a href="/trainer.html">👨‍⚕️ المدرب</a>
+<a href="/admin.html">⚙️ المدير</a>
+<a href="/report.html">📊 تقارير</a>
+</div>
+</div>
+
+<div class="container">
+<div class="monitor-header">
+<h2>🔴 مركز مراقبة IMCI Yemen</h2>
+<p style="color:var(--light);font-size:0.9rem;">مراقبة فورية لأداء المنصة والمستخدمين</p>
+<div class="monitor-status">
+<div class="status-item">
+<div class="status-dot online"></div>
+<span>السيرفر يعمل</span>
+</div>
+<div class="status-item">
+<div class="status-dot online"></div>
+<span>قاعدة البيانات متصلة</span>
+</div>
+<div class="status-item">
+<div class="status-dot warning"></div>
+<span>البث: استعداد</span>
+</div>
+<div class="status-item">
+<div class="status-dot online"></div>
+<span>12 متصل الآن</span>
+</div>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="monitor-card">
+<h3>💻 أداء النظام</h3>
+<div class="metric">
+<span class="metric-label">استخدام المعالج (CPU)</span>
+<span class="metric-value good">23%</span>
+</div>
+<div class="progress-bar"><div class="progress-fill fill-good" style="width:23%"></div></div>
+
+<div class="metric">
+<span class="metric-label">استخدام الذاكرة (RAM)</span>
+<span class="metric-value warn">67%</span>
+</div>
+<div class="progress-bar"><div class="progress-fill fill-warn" style="width:67%"></div></div>
+
+<div class="metric">
+<span class="metric-label">مساحة التخزين</span>
+<span class="metric-value good">45%</span>
+</div>
+<div class="progress-bar"><div class="progress-fill fill-good" style="width:45%"></div></div>
+
+<div class="metric">
+<span class="metric-label">سرعة الاستجابة</span>
+<span class="metric-value good">45ms</span>
+</div>
+
+<div class="metric">
+<span class="metric-label">الطلبات/الدقيقة</span>
+<span class="metric-value">128</span>
+</div>
+</div>
+
+<div class="monitor-card">
+<h3>👥 المستخدمون النشطون</h3>
+<div class="metric">
+<span class="metric-label">متصلون الآن</span>
+<span class="metric-value good">12</span>
+</div>
+<div class="metric">
+<span class="metric-label">في اختبار</span>
+<span class="metric-value warn">3</span>
+</div>
+<div class="metric">
+<span class="metric-label">يشاهدون بث</span>
+<span class="metric-value">0</span>
+</div>
+<div class="metric">
+<span class="metric-label">بروتوكولات مفتوحة</span>
+<span class="metric-value">8</span>
+</div>
+<div class="metric">
+<span class="metric-label">إجمالي الزيارات اليوم</span>
+<span class="metric-value good">47</span>
+</div>
+<div class="metric">
+<span class="metric-label">متوسط وقت الجلسة</span>
+<span class="metric-value">12 دقيقة</span>
+</div>
+</div>
+</div>
+
+<div class="alert-box">
+<div class="alert-icon">⚠️</div>
+<div class="alert-content">
+<div class="alert-title">تنبيه: استخدام ذاكرة مرتفع</div>
+<div class="alert-text">استخدام الذاكرة وصل 67% - يُنصح بمراقبة السيرفر</div>
+</div>
+</div>
+
+<div class="alert-box warning">
+<div class="alert-icon">📢</div>
+<div class="alert-content">
+<div class="alert-title">تذكير: محاضرة قادمة</div>
+<div class="alert-text">بروتوكول علامات الخطر - بعد 3 ساعات و45 دقيقة</div>
+</div>
+</div>
+
+<div class="monitor-card">
+<h3>📡 النشاط المباشر (Live Feed)</h3>
+<div class="live-feed" id="liveFeed">
+<div class="feed-item">
+<div class="feed-time">06:01</div>
+<div class="feed-icon">✅</div>
+<div class="feed-content">
+<div class="feed-title">أحمد محمد أكمل اختبار IMCI</div>
+<div class="feed-detail">الدرجة: 88% • الوقت: 4:30 دقيقة</div>
+<span class="feed-tag tag-quiz">اختبار</span>
+</div>
+</div>
+<div class="feed-item">
+<div class="feed-time">05:58</div>
+<div class="feed-icon">🔐</div>
+<div class="feed-content">
+<div class="feed-title">فاطمة عبدالله سجلت دخول</div>
+<div class="feed-detail">من: Termux/Android • IP: 192.168.1.45</div>
+<span class="feed-tag tag-login">دخول</span>
+</div>
+</div>
+<div class="feed-item">
+<div class="feed-time">05:55</div>
+<div class="feed-icon">🏆</div>
+<div class="feed-content">
+<div class="feed-title">تم إصدار شهادة جديدة</div>
+<div class="feed-detail">IMCI-7K9M2P • للمتدرب: محمد سعيد</div>
+<span class="feed-tag tag-cert">شهادة</span>
+</div>
+</div>
+<div class="feed-item">
+<div class="feed-time">05:45</div>
+<div class="feed-icon">📹</div>
+<div class="feed-content">
+<div class="feed-title">د. صلاح بدأ بث تجريبي</div>
+<div class="feed-detail">المدة: 5 دقائق • المشاهدون: 0</div>
+<span class="feed-tag tag-live">بث</span>
+</div>
+</div>
+<div class="feed-item">
+<div class="feed-time">05:30</div>
+<div class="feed-icon">📋</div>
+<div class="feed-content">
+<div class="feed-title">3 متدربين فتحوا بروتوكول الإسهال</div>
+<div class="feed-detail">متوسط وقت القراءة: 8 دقائق</div>
+<span class="feed-tag tag-quiz">بروتوكول</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="monitor-card">
+<h3>📱 الأجهزة المتصلة</h3>
+<div class="device-grid">
+<div class="device-card">
+<div class="device-icon">📱</div>
+<div class="device-name">Android - Termux</div>
+<div class="device-status">● نشط (د. صلاح)</div>
+</div>
+<div class="device-card">
+<div class="device-icon">💻</div>
+<div class="device-name">Windows - Chrome</div>
+<div class="device-status">● نشط (أحمد م.)</div>
+</div>
+<div class="device-card">
+<div class="device-icon">📱</div>
+<div class="device-name">iPhone - Safari</div>
+<div class="device-status offline">● غير نشط</div>
+</div>
+<div class="device-card">
+<div class="device-icon">📱</div>
+<div class="device-name">Android - Chrome</div>
+<div class="device-status">● نشط (فاطمة ع.)</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="sig">
+<span>🌐 Engineered & Designed by</span><br>
+<strong>Dr. Salah Al-Ahdal</strong><br>
+<span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+<script>
+// تحديث الـ Live Feed كل 30 ثانية (محاكاة)
+setInterval(() => {
+const feed = document.getElementById('liveFeed');
+const actions = [
+{icon:'✅', title:'متدرب أكمل بروتوكول', detail:'بروتوكول السعال • الوقت: 12 دقيقة', tag:'بروتوكول', tagClass:'tag-quiz'},
+{icon:'🔍', title:'بحث جديد في المنصة', detail:'كلمة: "جفاف شديد"', tag:'بحث', tagClass:'tag-login'},
+{icon:'📊', title:'تقرير أداء مُطلع عليه', detail:'المتدرب: أحمد م.', tag:'تقرير', tagClass:'tag-cert'}
+];
+const action = actions[Math.floor(Math.random() * actions.length)];
+const time = new Date().toLocaleTimeString('ar-SA', {hour:'2-digit', minute:'2-digit'});
+
+const item = document.createElement('div');
+item.className = 'feed-item';
+item.innerHTML = `
+<div class="feed-time">${time}</div>
+<div class="feed-icon">${action.icon}</div>
+<div class="feed-content">
+<div class="feed-title">${action.title}</div>
+<div class="feed-detail">${action.detail}</div>
+<span class="feed-tag ${action.tagClass}">${action.tag}</span>
+</div>
+`;
+feed.insertBefore(item, feed.firstChild);
+if (feed.children.length > 10) feed.lastChild.remove();
+}, 30000);
+</script>
+</body>
+</html>

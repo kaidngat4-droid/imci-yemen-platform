@@ -1,0 +1,32 @@
+/* ═══════════════════════════════════════════ */
+/* خطوط عربية احترافية - IMCI Yemen */
+/* ═══════════════════════════════════════════ */
+
+/* خط النسخ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+/* خط الرقعة */
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700;800&display=swap');
+
+/* خط الثلث */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* خط عصري */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+
+/* خط فارسي */
+@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+    --font-naskh: 'Noto Naskh Arabic', serif;
+    --font-roqa: 'Scheherazade New', serif;
+    --font-thulth: 'Amiri', serif;
+    --font-modern: 'Cairo', sans-serif;
+    --font-persian: 'Lateef', serif;
+}
+
+/* تطبيق الخطوط */
+body { font-family: var(--font-modern); }
+h1, h2, h3 { font-family: var(--font-naskh); }
+.official-text { font-family: var(--font-thulth); }
+.certificate-text { font-family: var(--font-roqa); }

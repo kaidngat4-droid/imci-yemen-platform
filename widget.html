@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة المعلومات - IMCI Yemen</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Amiri', 'Cairo', serif; background: #1a1a2e; color: white; padding: 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+.widget { background: #16213e; border-radius: 20px; padding: 25px; border: 1px solid #2d3748; }
+.widget h3 { color: #d4af37; margin-bottom: 15px; font-size: 1.1rem; }
+.stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #2d3748; }
+.stat-val { font-weight: bold; color: #4ade80; }
+.progress { background: #2d3748; height: 8px; border-radius: 10px; margin: 10px 0; }
+.progress-fill { height: 100%; border-radius: 10px; background: #0d9488; }
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center;color:#d4af37;margin-bottom:30px;">📊 لوحة المعلومات السريعة</h2>
+
+<div class="grid">
+<div class="widget">
+<h3>👥 المتدربين</h3>
+<div class="stat-row"><span>النشطين</span><span class="stat-val">4</span></div>
+<div class="stat-row"><span>المكتملين</span><span class="stat-val">2</span></div>
+<div class="stat-row"><span>المسجلين اليوم</span><span class="stat-val">1</span></div>
+</div>
+
+<div class="widget">
+<h3>📚 الدورات</h3>
+<div class="stat-row"><span>أساسي</span><span>120 مسجل</span></div>
+<div class="stat-row"><span>متوسط</span><span>75 مسجل</span></div>
+<div class="stat-row"><span>متقدم</span><span>45 مسجل</span></div>
+</div>
+
+<div class="widget">
+<h3>📹 المحاضرات</h3>
+<div class="stat-row"><span>اليوم</span><span class="stat-val">1 مباشر</span></div>
+<div class="stat-row"><span>هذا الأسبوع</span><span>3</span></div>
+<div class="stat-row"><span>الحضور</span><span>62</span></div>
+</div>
+
+<div class="widget">
+<h3>🏆 الإنجازات</h3>
+<div class="stat-row"><span>شهادات اليوم</span><span class="stat-val">5</span></div>
+<div class="stat-row"><span>اختبارات اليوم</span><span>12</span></div>
+<div class="stat-row"><span>نسبة النجاح</span><span class="stat-val">88%</span></div>
+</div>
+
+<div class="widget">
+<h3>⚙️ حالة النظام</h3>
+<div class="stat-row"><span>API</span><span class="stat-val">✅ يعمل</span></div>
+<div class="stat-row"><span>قاعدة البيانات</span><span class="stat-val">✅ متصل</span></div>
+<div class="stat-row"><span>الذاكرة</span><span>45%</span></div>
+</div>
+
+<div class="widget">
+<h3>🕐 آخر النشاطات</h3>
+<div class="stat-row"><span>تسجيل دخول</span><span>منذ دقيقة</span></div>
+<div class="stat-row"><span>إكمال اختبار</span><span>منذ 5 دقائق</span></div>
+<div class="stat-row"><span>حضور محاضرة</span><span>منذ ساعة</span></div>
+</div>
+</div>
+
+</body>
+</html>

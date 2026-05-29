@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1a5f7a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IMCI Yemen">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>غير متصل - IMCI Yemen</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1a5f7a, #2d8f8f);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .offline-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+        }
+        .icon { font-size: 80px; margin-bottom: 20px; }
+        h1 { margin-bottom: 10px; }
+        p { opacity: 0.9; margin-bottom: 20px; line-height: 1.8; }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c8a84e;
+            color: #1a3a4a;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="offline-box">
+        <div class="icon">📡</div>
+        <h1>أنت غير متصل</h1>
+        <p>لا يوجد اتصال بالإنترنت حالياً.<br>سيتم تحميل الصفحة تلقائياً عند عودة الاتصال.</p>
+        <button class="btn" onclick="location.reload()">🔄 إعادة المحاولة</button>
+    </div>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js").then(() => console.log("✅ SW registered"));
+}
+</script>
+</body>
+</html>

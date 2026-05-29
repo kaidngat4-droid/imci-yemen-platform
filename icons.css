@@ -1,0 +1,11 @@
+/* Font Awesome 6 */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+/* أيقونات مخصصة */
+.icon-lg { font-size: 3rem; }
+.icon-md { font-size: 2rem; }
+.icon-sm { font-size: 1rem; }
+.icon-gold { color: #d4af37; }
+.icon-teal { color: #14b8a6; }
+.icon-red { color: #ef4444; }
+.icon-green { color: #22c55e; }

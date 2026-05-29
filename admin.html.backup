@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMCI - لوحة المدير</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#14b8a6;--gold:#d4af37;--dark:#0f172a;--light:#cbd5e1;--danger:#CE1126;--success:#7cb342;--info:#3b82f6;--warning:#f59e0b}
+        body{font-family:'Cairo',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding-top:180px}
+        .flag{display:flex;height:5px;position:fixed;top:0;left:0;right:0;z-index:10001}
+        .flag-r{flex:1;background:#CE1126}.flag-w{flex:1;background:#fff}.flag-b{flex:1;background:#000}
+        .top-bar{position:fixed;top:5px;left:0;right:0;z-index:10000;background:linear-gradient(180deg,#1a1a2e,#16213e);box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+        .header{text-align:center;padding:15px}
+        .header img{width:70px;margin-bottom:5px}
+        .header h1{font-family:'Amiri',serif;color:var(--gold);font-size:1.3rem}
+        .nav{display:flex;gap:6px;justify-content:center;padding:8px;background:rgba(0,0,0,0.3);flex-wrap:wrap;border-top:1px solid rgba(212,175,55,0.2)}
+        .nav a{color:var(--gold);text-decoration:none;padding:5px 10px;font-weight:600;font-size:0.8rem;border-radius:8px}
+        .nav a:hover{background:rgba(212,175,55,0.15)}
+        
+        .container{max-width:1200px;margin:auto;padding:20px}
+        
+        .admin-badge{background:linear-gradient(135deg,var(--danger),#991b1b);border-radius:16px;padding:20px;margin:20px 0;text-align:center}
+        .admin-badge h2{color:#fff;font-size:1.3rem}
+        .admin-badge p{color:#fecaca;font-size:0.9rem;margin-top:5px}
+        
+        .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin:20px 0}
+        .stat-box{background:rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center;border-top:3px solid var(--primary)}
+        .stat-box.gold{border-color:var(--gold)}
+        .stat-box.danger{border-color:var(--danger)}
+        .stat-box.info{border-color:var(--info)}
+        .stat-box.warning{border-color:var(--warning)}
+        .stat-box .num{font-size:2.2rem;font-weight:900;color:#5eead4}
+        .stat-box .label{color:var(--light);font-size:0.85rem;margin-top:5px}
+        .stat-box .change{font-size:0.8rem;margin-top:5px}
+        .change-up{color:var(--success)}
+        .change-down{color:var(--danger)}
+        
+        .section{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0}
+        .section h3{color:var(--gold);margin-bottom:20px;font-family:'Amiri',serif;font-size:1.2rem}
+        
+        .admin-table{width:100%;border-collapse:collapse}
+        .admin-table th{background:rgba(20,184,166,0.15);color:#5eead4;padding:12px;text-align:right;font-size:0.85rem}
+        .admin-table td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--light);font-size:0.85rem}
+        .admin-table tr:hover{background:rgba(255,255,255,0.03)}
+        .role-admin{color:var(--danger);font-weight:700}
+        .role-trainer{color:var(--primary);font-weight:700}
+        .role-student{color:var(--light)}
+        .status-active{color:var(--success)}
+        .status-pending{color:var(--warning)}
+        .status-blocked{color:var(--danger)}
+        .btn-xs{padding:4px 10px;border-radius:15px;border:none;font-family:'Cairo';font-size:0.75rem;cursor:pointer;margin:2px}
+        .btn-edit{background:var(--info);color:#fff}
+        .btn-delete{background:var(--danger);color:#fff}
+        .btn-approve{background:var(--success);color:#fff}
+        
+        .chart-placeholder{background:#1a1a2e;border-radius:12px;padding:30px;text-align:center;margin:15px 0}
+        .chart-placeholder .bar{display:inline-block;width:40px;background:var(--primary);margin:0 5px;border-radius:6px 6px 0 0;vertical-align:bottom}
+        .chart-placeholder .bar-label{display:block;font-size:0.7rem;color:var(--light);margin-top:8px}
+        
+        .log-item{display:flex;gap:15px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem}
+        .log-time{color:var(--gold);font-family:monospace;min-width:80px}
+        .log-user{color:var(--primary)}
+        .log-action{color:var(--light)}
+        
+        .sig{background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid var(--gold);margin-top:30px}
+        .sig span{color:#888;font-size:0.7rem}
+        .sig strong{color:var(--gold)}
+        @media(max-width:600px){body{padding-top:160px}}
+    </style>
+</head>
+<body>
+
+<div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
+
+<div class="top-bar">
+    <div class="header">
+        <img src="images/yemen-eagle.png" alt="Yemen">
+        <h1>⚙️ لوحة تحكم المدير</h1>
+    </div>
+    <div class="nav">
+        <a href="/">🏠 الرئيسية</a>
+        <a href="/trainer.html">👨‍⚕️ المدرب</a>
+        <a href="/monitor.html">📡 مراقبة</a>
+        <a href="/report.html">📊 تقارير</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="admin-badge">
+        <h2>🔴 وضع المدير العام</h2>
+        <p>صلاحيات كاملة على النظام - الرجاء الحذر في التعديلات</p>
+    </div>
+    
+    <div class="stats-row">
+        <div class="stat-box">
+            <div class="num">156</div>
+            <div class="label">إجمالي المستخدمين</div>
+            <div class="change change-up">↑ +12 هذا الأسبوع</div>
+        </div>
+        <div class="stat-box gold">
+            <div class="num">8</div>
+            <div class="label">مدربون</div>
+            <div class="change change-up">↑ +2 جديد</div>
+        </div>
+        <div class="stat-box info">
+            <div class="num">47</div>
+            <div class="label">متدربون نشطون</div>
+            <div class="change change-up">↑ 89% نشاط</div>
+        </div>
+        <div class="stat-box warning">
+            <div class="num">23</div>
+            <div class="label">بانتظار الموافقة</div>
+            <div class="change change-down">↑ يحتاج مراجعة</div>
+        </div>
+        <div class="stat-box danger">
+            <div class="num">3</div>
+            <div class="label">بلاغات أمنية</div>
+            <div class="change change-down">→ لم تُعالج</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h3>👥 إدارة المستخدمين</h3>
+        <table class="admin-table">
+            <tr>
+                <th>الاسم</th>
+                <th>البريد</th>
+                <th>الدور</th>
+                <th>الفرع</th>
+                <th>الحالة</th>
+                <th>تاريخ التسجيل</th>
+                <th>إجراءات</th>
+            </tr>
+            <tr>
+                <td><strong>د. صلاح الأحمدل</strong></td>
+                <td>dr.salah@imci.ye</td>
+                <td><span class="role-admin">مدير + مدرب</span></td>
+                <td>إب</td>
+                <td><span class="status-active">● نشط</span></td>
+                <td>2026-01-15</td>
+                <td>
+                    <button class="btn-xs btn-edit">تعديل</button>
+                </td>
+            </tr>
+            <tr>
+                <td>أحمد محمد علي</td>
+                <td>ahmed@email.com</td>
+                <td><span class="role-student">متدرب</span></td>
+                <td>إب</td>
+                <td><span class="status-active">● نشط</span></td>
+                <td>2026-05-20</td>
+                <td>
+                    <button class="btn-xs btn-edit">تعديل</button>
+                    <button class="btn-xs btn-delete">حظر</button>
+                </td>
+            </tr>
+            <tr>
+                <td>فاطمة عبدالله</td>
+                <td>fatima@email.com</td>
+                <td><span class="role-student">متدرب</span></td>
+                <td>تعز</td>
+                <td><span class="status-pending">⏳ بانتظار</span></td>
+                <td>2026-05-28</td>
+                <td>
+                    <button class="btn-xs btn-approve">موافقة</button>
+                    <button class="btn-xs btn-delete">رفض</button>
+                </td>
+            </tr>
+            <tr>
+                <td>د. خالد الصنعاني</td>
+                <td>dr.khaled@imci.ye</td>
+                <td><span class="role-trainer">مدرب</span></td>
+                <td>صنعاء</td>
+                <td><span class="status-active">● نشط</span></td>
+                <td>2026-03-10</td>
+                <td>
+                    <button class="btn-xs btn-edit">تعديل</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h3>📈 إحصائيات المنصة</h3>
+        <div class="chart-placeholder">
+            <div style="margin-bottom:15px;color:var(--light)">النشاط الشهري - 2026</div>
+            <div class="bar" style="height:60px"><span class="bar-label">يناير</span></div>
+            <div class="bar" style="height:80px;background:var(--gold)"><span class="bar-label">فبراير</span></div>
+            <div class="bar" style="height:45px"><span class="bar-label">مارس</span></div>
+            <div class="bar" style="height:90px;background:var(--gold)"><span class="bar-label">أبريل</span></div>
+            <div class="bar" style="height:120px;background:var(--success)"><span class="bar-label">مايو</span></div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h3>📋 سجل النظام (System Log)</h3>
+        <div class="log-item">
+            <div class="log-time">06:02</div>
+            <div class="log-user">[د. صلاح]</div>
+            <div class="log-action">قام ببدء بث مباشر: بروتوكول الإسهال</div>
+        </div>
+        <div class="log-item">
+            <div class="log-time">05:45</div>
+            <div class="log-user">[النظام]</div>
+            <div class="log-action">تم إنشاء شهادة جديدة: IMCI-ABC123</div>
+        </div>
+        <div class="log-item">
+            <div class="log-time">05:30</div>
+            <div class="log-user">[فاطمة ع.]</div>
+            <div class="log-action">سجلت حساب جديد - بانتظار الموافقة</div>
+        </div>
+        <div class="log-item">
+            <div class="log-time">04:15</div>
+            <div class="log-user">[أحمد م.]</div>
+            <div class="log-action">أكمل اختبار IMCI بنتيجة 92%</div>
+        </div>
+        <div class="log-item">
+            <div class="log-time">03:00</div>
+            <div class="log-user">[النظام]</div>
+            <div class="log-action">نسخة احتياطية تلقائية - تمت بنجاح</div>
+        </div>
+    </div>
+</div>
+
+<div class="sig">
+    <span>🌐 Engineered & Designed by</span><br>
+    <strong>Dr. Salah Al-Ahdal</strong><br>
+    <span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+</body>
+</html>
