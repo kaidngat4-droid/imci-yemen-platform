@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMCI - لوحة المدرب</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#14b8a6;--gold:#d4af37;--dark:#0f172a;--light:#cbd5e1;--danger:#CE1126;--success:#7cb342;--info:#3b82f6}
+        body{font-family:'Cairo',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding-top:180px}
+        .flag{display:flex;height:5px;position:fixed;top:0;left:0;right:0;z-index:10001}
+        .flag-r{flex:1;background:#CE1126}.flag-w{flex:1;background:#fff}.flag-b{flex:1;background:#000}
+        .top-bar{position:fixed;top:5px;left:0;right:0;z-index:10000;background:linear-gradient(180deg,#1a1a2e,#16213e);box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+        .header{text-align:center;padding:15px}
+        .header img{width:70px;margin-bottom:5px}
+        .header h1{font-family:'Amiri',serif;color:var(--gold);font-size:1.3rem}
+        .nav{display:flex;gap:6px;justify-content:center;padding:8px;background:rgba(0,0,0,0.3);flex-wrap:wrap;border-top:1px solid rgba(212,175,55,0.2)}
+        .nav a{color:var(--gold);text-decoration:none;padding:5px 10px;font-weight:600;font-size:0.8rem;border-radius:8px}
+        .nav a:hover{background:rgba(212,175,55,0.15)}
+        
+        .container{max-width:1100px;margin:auto;padding:20px}
+        
+        .welcome-bar{background:linear-gradient(135deg,var(--primary),#0d9488);border-radius:16px;padding:20px;margin:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+        .welcome-text h2{font-size:1.3rem;margin-bottom:5px}
+        .welcome-text p{font-size:0.9rem;opacity:0.9}
+        .welcome-status{background:rgba(255,255,255,0.2);padding:8px 16px;border-radius:20px;font-size:0.85rem}
+        
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin:20px 0}
+        .stat-card{background:rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center;transition:0.3s}
+        .stat-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px)}
+        .stat-icon{font-size:35px;margin-bottom:10px}
+        .stat-value{font-size:2rem;font-weight:900;color:#5eead4}
+        .stat-label{color:var(--light);font-size:0.85rem;margin-top:5px}
+        
+        .section{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0}
+        .section h3{color:var(--gold);margin-bottom:20px;font-family:'Amiri',serif;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+        
+        .session-table{width:100%;border-collapse:collapse}
+        .session-table th{background:rgba(20,184,166,0.2);color:#5eead4;padding:12px;text-align:right;font-size:0.9rem}
+        .session-table td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--light);font-size:0.9rem}
+        .session-table tr:hover{background:rgba(255,255,255,0.03)}
+        .status-badge{padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700}
+        .status-live{background:rgba(206,17,38,0.2);color:#ef4444}
+        .status-upcoming{background:rgba(59,130,246,0.2);color:#60a5fa}
+        .status-done{background:rgba(124,179,66,0.2);color:#7cb342}
+        .btn-sm{padding:6px 14px;border-radius:20px;border:none;font-family:'Cairo';font-weight:700;cursor:pointer;font-size:0.8rem}
+        .btn-start{background:var(--danger);color:#fff}
+        .btn-edit{background:var(--info);color:#fff}
+        .btn-view{background:var(--primary);color:#fff}
+        
+        .student-list{display:flex;flex-direction:column;gap:10px}
+        .student-item{display:flex;align-items:center;gap:15px;padding:12px;background:#1a1a2e;border-radius:12px}
+        .student-avatar{width:45px;height:45px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem}
+        .student-info{flex:1}
+        .student-name{color:#fff;font-weight:600}
+        .student-progress{color:var(--light);font-size:0.8rem;margin-top:3px}
+        .student-score{font-weight:700;color:var(--gold)}
+        
+        .quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin:20px 0}
+        .action-btn{background:rgba(255,255,255,0.06);border:2px solid rgba(212,175,55,0.3);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:0.3s;text-decoration:none;color:#fff;display:block}
+        .action-btn:hover{background:rgba(212,175,55,0.1);border-color:var(--gold);transform:translateY(-3px)}
+        .action-btn .icon{font-size:30px;margin-bottom:10px}
+        .action-btn .label{font-weight:600;color:var(--gold)}
+        
+        .sig{background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid var(--gold);margin-top:30px}
+        .sig span{color:#888;font-size:0.7rem}
+        .sig strong{color:var(--gold)}
+        @media(max-width:600px){body{padding-top:160px}.welcome-bar{flex-direction:column;text-align:center}}
+    </style>
+</head>
+<body>
+
+<div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
+
+<div class="top-bar">
+    <div class="header">
+        <img src="images/yemen-eagle.png" alt="Yemen">
+        <h1>👨‍⚕️ لوحة المدرب</h1>
+    </div>
+    <div class="nav">
+        <a href="/">🏠 الرئيسية</a>
+        <a href="/admin.html">⚙️ المدير</a>
+        <a href="/monitor.html">📡 مراقبة</a>
+        <a href="/report.html">📊 تقارير</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="welcome-bar">
+        <div class="welcome-text">
+            <h2>مرحباً د. صلاح الأحمدل</h2>
+            <p>مدرب IMCI المعتمد - فرع إب</p>
+        </div>
+        <div class="welcome-status">🟢 متصل الآن</div>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">👨‍🎓</div>
+            <div class="stat-value">47</div>
+            <div class="stat-label">متدرب نشط</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📹</div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">محاضرة هذا الشهر</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-value">38</div>
+            <div class="stat-label">اختبار منجز</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-value">89%</div>
+            <div class="stat-label">معدل النجاح</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h3>📅 جلساتي القادمة</h3>
+        <table class="session-table">
+            <tr>
+                <th>التاريخ</th>
+                <th>الموضوع</th>
+                <th>الوقت</th>
+                <th>المتدربون</th>
+                <th>الحالة</th>
+                <th>إجراء</th>
+            </tr>
+            <tr>
+                <td>السبت 30 مايو</td>
+                <td>علامات الخطر العامة</td>
+                <td>10:00 ص</td>
+                <td>15 مسجل</td>
+                <td><span class="status-badge status-upcoming">قادم</span></td>
+                <td><button class="btn-sm btn-start">▶ بدء البث</button></td>
+            </tr>
+            <tr>
+                <td>الأحد 31 مايو</td>
+                <td>بروتوكول السعال</td>
+                <td>10:00 ص</td>
+                <td>12 مسجل</td>
+                <td><span class="status-badge status-upcoming">قادم</span></td>
+                <td><button class="btn-sm btn-edit">✏️ تعديل</button></td>
+            </tr>
+            <tr>
+                <td>الثلاثاء 25 مايو</td>
+                <td>مقدمة في IMCI</td>
+                <td>10:00 ص</td>
+                <td>18 حضور</td>
+                <td><span class="status-badge status-done">منتهي</span></td>
+                <td><button class="btn-sm btn-view">👁️ عرض</button></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h3>🎓 أداء المتدربين</h3>
+        <div class="student-list">
+            <div class="student-item">
+                <div class="student-avatar" style="background:var(--success)">أ</div>
+                <div class="student-info">
+                    <div class="student-name">أحمد محمد علي</div>
+                    <div class="student-progress">5/6 بروتوكولات • 3/5 اختبارات</div>
+                </div>
+                <div class="student-score">92%</div>
+            </div>
+            <div class="student-item">
+                <div class="student-avatar" style="background:var(--primary)">ف</div>
+                <div class="student-info">
+                    <div class="student-name">فاطمة عبدالله صالح</div>
+                    <div class="student-progress">4/6 بروتوكولات • 2/5 اختبارات</div>
+                </div>
+                <div class="student-score">78%</div>
+            </div>
+            <div class="student-item">
+                <div class="student-avatar" style="background:var(--gold);color:#1a1a1a">م</div>
+                <div class="student-info">
+                    <div class="student-name">محمد سعيد أحمد</div>
+                    <div class="student-progress">2/6 بروتوكولات • 1/5 اختبارات</div>
+                </div>
+                <div class="student-score" style="color:var(--danger)">45%</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="quick-actions">
+        <a href="/live-room.html" class="action-btn">
+            <div class="icon">📹</div>
+            <div class="label">بدء بث مباشر</div>
+        </a>
+        <a href="/quiz.html" class="action-btn">
+            <div class="icon">✅</div>
+            <div class="label">إنشاء اختبار</div>
+        </a>
+        <a href="/protocol.html" class="action-btn">
+            <div class="icon">📋</div>
+            <div class="label">تحرير بروتوكول</div>
+        </a>
+        <a href="/report.html" class="action-btn">
+            <div class="icon">📊</div>
+            <div class="label">تقرير كامل</div>
+        </a>
+    </div>
+</div>
+
+<div class="sig">
+    <span>🌐 Engineered & Designed by</span><br>
+    <strong>Dr. Salah Al-Ahdal</strong><br>
+    <span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+</body>
+</html>

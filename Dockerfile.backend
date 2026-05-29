@@ -1,0 +1,15 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# تثبيت التبعيات
+COPY backend/package.json ./
+RUN npm install --production
+
+# نسخ الكود
+COPY backend/src/ ./src/
+COPY .env ./
+
+EXPOSE 3000
+
+CMD ["node", "src/server.js"]

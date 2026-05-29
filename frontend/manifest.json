@@ -1,0 +1,15 @@
+{
+    "name": "IMCI Yemen - منصة التدريب الطبي",
+    "short_name": "IMCI Yemen",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#14b8a6",
+    "icons": [
+        {
+            "src": "images/favicon.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        }
+    ]
+}

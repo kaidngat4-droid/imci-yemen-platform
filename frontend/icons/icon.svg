@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#1a5f7a"/>
+  <circle cx="256" cy="220" r="120" fill="#2d8f8f"/>
+  <text x="256" y="180" text-anchor="middle" font-size="120">🏥</text>
+  <rect x="156" y="360" width="200" height="30" rx="15" fill="#c8a84e"/>
+  <text x="256" y="440" text-anchor="middle" fill="white" font-size="40" font-weight="bold">IMCI</text>
+  <text x="256" y="475" text-anchor="middle" fill="#c8a84e" font-size="20">YEMEN</text>
+</svg>

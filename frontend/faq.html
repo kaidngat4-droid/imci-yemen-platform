@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأسئلة الشائعة - IMCI Yemen</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Cairo','Amiri',sans-serif; background:#0f172a; color:white; min-height:100vh; }
+.container { max-width:800px; margin:0 auto; padding:40px 20px; }
+h1 { font-family:'Amiri',serif; text-align:center; color:#5eead4; margin-bottom:40px; font-size:2rem; }
+.faq-item { margin-bottom:15px; }
+.faq-q {
+width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+border-radius:16px; padding:18px 25px; color:white; font-family:'Amiri',serif;
+font-size:1.1rem; font-weight:700; cursor:pointer; text-align:right;
+display:flex; align-items:center; justify-content:space-between; transition:all 0.3s;
+}
+.faq-q:hover { background:rgba(255,255,255,0.1); }
+.faq-icon { color:#5eead4; font-size:1.5rem; transition:transform 0.3s; }
+.faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s; background:rgba(255,255,255,0.03); border-radius:0 0 16px 16px; }
+.faq-a.open { max-height:300px; padding:20px 25px; }
+.faq-a p { color:#cbd5e1; line-height:1.8; }
+.btn { display:inline-block; padding:12px 25px; background:#14b8a6; color:white; border-radius:25px; text-decoration:none; font-weight:700; margin-top:30px; }
+.sig { background:#0d2b1e; padding:16px; text-align:center; border-top:1px solid #d4af37; margin-top:40px; }
+.sig span { color:#888; font-size:0.7rem; }
+.sig strong { color:#d4af37; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>❓ الأسئلة الشائعة</h1>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">كيف يمكنني الحصول على الشهادة المعتمدة؟<span class="faq-icon">+</span></button>
+<div class="faq-a"><p>يمكنك الحصول على الشهادة بعد إكمال المستويات الثلاثة واجتياز الاختبار النهائي بنجاح بنسبة 80% على الأقل. الشهادة تصدر إلكترونياً مع QR Code للتحقق.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">هل المحتوى التدريبي متاح دائماً؟<span class="faq-icon">+</span></button>
+<div class="faq-a"><p>نعم، جميع الدروس المسجلة متاحة على مدار الساعة. أما البث المباشر فيتم الإعلان عن مواعيده مسبقاً.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">هل يمكنني التدريب من الهاتف المحمول؟<span class="faq-icon">+</span></button>
+<div class="faq-a"><p>بالتأكيد! المنصة مصممة بشكل متجاوب وتعمل على جميع الأجهزة.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">ما هي مدة صلاحية الشهادة؟<span class="faq-icon">+</span></button>
+<div class="faq-a"><p>الشهادة صالحة لمدة سنتين من تاريخ الإصدار. يمكن تجديدها باجتياز اختبار تجديد معتمد.</p></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">هل هناك رسوم للتسجيل؟<span class="faq-icon">+</span></button>
+<div class="faq-a"><p>المنصة مجانية بالكامل للكوادر الطبية العاملة في المرافق الحكومية.</p></div>
+</div>
+
+<a href="/" class="btn">← العودة للرئيسية</a>
+</div>
+
+<div class="sig">
+<span>🌐 Engineered & Designed by</span><br>
+<strong>Dr. Salah Al-Ahdal</strong><br>
+<span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+<script>
+function toggleFaq(btn){
+const a=btn.nextElementSibling;
+const isOpen=a.classList.contains('open');
+document.querySelectorAll('.faq-a').forEach(e=>e.classList.remove('open'));
+if(!isOpen) a.classList.add('open');
+}
+</script>
+</body>
+</html>

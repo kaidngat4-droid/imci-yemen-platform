@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>الاختبارات - IMCI Yemen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Amiri', 'Cairo', serif; background: #f8fafc; }
+        .header { background: white; border-bottom: 3px solid #0d9488; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .flag { display: flex; height: 5px; }
+        .flag-r { flex: 1; background: #b91c1c; } .flag-w { flex: 1; background: #fff; } .flag-b { flex: 1; background: #1a1a1a; }
+        .container { max-width: 900px; margin: 30px auto; padding: 20px; }
+        .card { background: white; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .btn { display: inline-block; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin: 8px; font-size: 16px; }
+        .btn-teal { background: #0d9488; color: white; }
+        .btn-red { background: #b91c1c; color: white; }
+        .btn-gold { background: #fbbf24; color: #1a1a1a; }
+        .btn-green { background: #16a34a; color: white; }
+    </style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+.unified-header { background: linear-gradient(135deg, #0d2b1e, #1a3a4a); color: white; }
+.unified-header .flag-bar { display: flex; height: 5px; }
+.unified-header .flag-red { flex: 1; background: #CE1126; }
+.unified-header .flag-white { flex: 1; background: #FFFFFF; }
+.unified-header .flag-black { flex: 1; background: #000000; }
+.unified-header .header-row { display: flex; align-items: center; justify-content: center; padding: 12px 20px; gap: 20px; flex-wrap: wrap; text-align: center; }
+.unified-header .emblem { width: 60px; height: 60px; }
+.unified-header .title-main { font-family: 'Amiri', serif; font-size: 1.4rem; color: #d4af37; font-weight: 700; margin: 0; }
+.unified-header .title-sub { font-family: 'Amiri', serif; font-size: 1rem; color: #fff; margin: 2px 0; }
+.unified-header .title-tag { font-size: 0.75rem; color: #a0c4d8; }
+.unified-header .nav-bar { background: rgba(0,0,0,0.3); padding: 8px 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+.unified-header .nav-link { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 0.85rem; padding: 5px 10px; }
+.unified-header .nav-link:hover { color: #fff; }
+@media (max-width: 600px) {
+  .unified-header .header-row { gap: 8px; padding: 8px; }
+  .unified-header .emblem { width: 40px; height: 40px; }
+  .unified-header .title-main { font-size: 1rem; }
+  .unified-header .title-sub { font-size: 0.75rem; }
+  .unified-header .nav-link { font-size: 0.7rem; padding: 3px 6px; }
+}
+</style>
+
+<header class="unified-header">
+    <div class="flag-bar">
+        <div class="flag-red"></div>
+        <div class="flag-white"></div>
+        <div class="flag-black"></div>
+    </div>
+    <div class="header-row">
+        <img src="images/yemen-emblem.png" alt="النسر الجمهوري" class="emblem" onerror="this.style.display='none'">
+        <div>
+            <h1 class="title-main">الجمهورية اليمنية</h1>
+            <h2 class="title-sub">وزارة الصحة العامة والبيئة</h2>
+            <p class="title-tag">منصة IMCI للرعاية التكاملية لصحة الطفل</p>
+        </div>
+    </div>
+    <nav class="nav-bar">
+        <a href="/" class="nav-link">🏠 الرئيسية</a>
+        <a href="/dashboard" class="nav-link">📊 لوحة التحكم</a>
+        <a href="/lesson" class="nav-link">📝 الدرس</a>
+        <a href="/exam" class="nav-link">✅ اختبارات</a>
+        <a href="/live-room" class="nav-link">📹 بث مباشر</a>
+        <a href="/certificate" class="nav-link">🏆 شهادات</a>
+        <a href="/admin" class="nav-link">🛡️ الإدارة</a>
+    </nav>
+</header>
+
+
+<div class="container">
+    <h2 style="color:#0f172a;margin-bottom:20px;">✅ الاختبارات التفاعلية</h2>
+    
+    <div class="card">
+        <h3>📝 اختر مستوى الاختبار:</h3>
+        <div style="text-align:center;margin:20px 0;">
+            <a href="#" class="btn btn-green" onclick="startQuiz('basic')">🟢 المستوى الأساسي<br><small>10 أسئلة | 15 دقيقة</small></a>
+            <a href="#" class="btn btn-gold" onclick="startQuiz('intermediate')">🟡 المستوى المتوسط<br><small>10 أسئلة | 20 دقيقة</small></a>
+            <a href="#" class="btn btn-red" onclick="startQuiz('advanced')">🔴 المستوى المتقدم<br><small>10 أسئلة | 30 دقيقة</small></a>
+        </div>
+    </div>
+
+    <div class="card" id="quizArea" style="display:none;">
+        <h3 id="quizTitle"></h3>
+        <div id="questions"></div>
+        <button class="btn btn-teal" onclick="submitQuiz()" style="width:100%;margin-top:20px;">📝 تقديم الإجابات</button>
+        <div id="result" style="text-align:center;margin-top:20px;"></div>
+    </div>
+
+    <a href="/dashboard" class="btn btn-teal">← العودة للوحة التحكم</a>
+</div>
+
+<div style="background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid #d4af37;margin-top:30px;">
+    <span style="color:#888;font-size:0.7rem;">🌐 Engineered & Designed by</span><br>
+    <span style="color:#d4af37;font-weight:bold;">Dr. Salah Al-Ahdal</span><br>
+    <span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+<script>
+const quizData = {
+    basic: [
+        {q:'ما الهدف الرئيسي لاستراتيجية IMCI؟', o:['زيادة الأرباح','الحد من وفيات الأطفال','تدريب الأطباء فقط','توفير الأدوية'], a:1},
+        {q:'كم عدد مكونات IMCI؟', o:['2','3','5','7'], a:1},
+        {q:'من طور استراتيجية IMCI؟', o:['وزارة الصحة','WHO واليونيسيف','البنك الدولي','الهلال الأحمر'], a:1}
+    ],
+    intermediate: [
+        {q:'المعدل الطبيعي للتنفس عند الرضيع:', o:['20-30','30-40','حتى 50','60'], a:2},
+        {q:'علامة الالتهاب الرئوي الحاد:', o:['سعال','انكماش الصدر','رشح','عطاس'], a:1}
+    ],
+    advanced: [
+        {q:'درجة الحرارة التي تعتبر حمى:', o:['37°C','37.5°C+','38.5°C','39°C'], a:1},
+        {q:'متى تبدأ الرضاعة الطبيعية الحصرية؟', o:['بعد يوم','الساعة الأولى','أسبوع','عند الخروج'], a:1}
+    ]
+};
+let currentQuiz = [];
+let answers = {};
+
+function startQuiz(level) {
+    currentQuiz = quizData[level] || quizData.basic;
+    answers = {};
+    document.getElementById('quizArea').style.display = 'block';
+    document.getElementById('quizTitle').textContent = level === 'basic' ? '🟢 المستوى الأساسي' : level === 'intermediate' ? '🟡 المستوى المتوسط' : '🔴 المستوى المتقدم';
+    document.getElementById('questions').innerHTML = currentQuiz.map((q, i) => `
+        <div style="background:#f8fafc;padding:15px;border-radius:10px;margin:10px 0;border-right:4px solid #0d9488;">
+            <strong>${i+1}. ${q.q}</strong>
+            ${q.o.map((opt, j) => `
+                <label style="display:block;padding:8px;margin:5px 0;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;" onclick="selectAnswer(${i},${j},this)">
+                    <input type="radio" name="q${i}" value="${j}"> ${opt}
+                </label>
+            `).join('')}
+        </div>
+    `).join('');
+    document.getElementById('result').innerHTML = '';
+}
+
+function selectAnswer(qIdx, optIdx, el) {
+    answers[qIdx] = optIdx;
+    document.querySelectorAll(`input[name="q${qIdx}"]`).forEach(r => r.closest('label').style.background = '');
+    el.style.background = '#d4f4f4';
+}
+
+function submitQuiz() {
+    let score = 0;
+    currentQuiz.forEach((q, i) => { if (answers[i] === q.a) score++; });
+    const pct = Math.round((score / currentQuiz.length) * 100);
+    document.getElementById('result').innerHTML = `
+        <div style="padding:20px;border-radius:12px;background:${pct>=70 ? '#c6f6d5' : '#fed7d7'};color:${pct>=70 ? '#22543d' : '#9b2c2c'};">
+            <h2>${pct>=70 ? '🎉 مبروك!' : '😔 حاول مرة أخرى'}</h2>
+            <p style="font-size:36px;font-weight:bold;">${pct}%</p>
+            <p>${score} من ${currentQuiz.length} صحيحة</p>
+        </div>`;
+}
+</script>
+</body>
+</html>

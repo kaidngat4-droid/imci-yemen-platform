@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMCI - البث المباشر</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--primary:#14b8a6;--gold:#d4af37;--dark:#0f172a;--light:#cbd5e1;--danger:#CE1126}
+        body{font-family:'Cairo',sans-serif;background:var(--dark);color:#fff;min-height:100vh}
+        .flag{display:flex;height:5px}
+        .flag-r{flex:1;background:#CE1126}.flag-w{flex:1;background:#fff}.flag-b{flex:1;background:#000}
+        .header{text-align:center;padding:20px;background:linear-gradient(180deg,#1a1a2e,#16213e)}
+        .header img{width:80px;margin-bottom:10px}
+        .header h1{font-family:'Amiri',serif;color:var(--gold);font-size:1.5rem}
+        .container{max-width:900px;margin:auto;padding:20px}
+        .nav{display:flex;gap:10px;justify-content:center;padding:10px;flex-wrap:wrap}
+        .nav a{color:var(--gold);text-decoration:none;padding:8px 14px;font-weight:600;border-radius:8px}
+        .nav a:hover{background:rgba(212,175,55,0.15)}
+
+        .live-now{background:linear-gradient(135deg,var(--danger),#a10e1e);border-radius:20px;padding:25px;margin:20px 0;text-align:center;animation:pulse 2s infinite}
+        .live-now h2{color:#fff;font-size:1.5rem;margin-bottom:10px}
+        .live-now p{color:#ffd7d7;margin-bottom:15px}
+        .badge-live{display:inline-block;background:#fff;color:var(--danger);padding:6px 18px;border-radius:20px;font-weight:800;font-size:0.9rem;animation:blink 1s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.6}}
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(206,17,38,0.4)}50%{box-shadow:0 0 20px 10px rgba(206,17,38,0)}}
+
+        .countdown-card{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0;text-align:center;border:2px solid var(--primary)}
+        .countdown-card h3{color:#5eead4;margin-bottom:15px;font-size:1.2rem}
+        .countdown{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:20px 0}
+        .count-item{background:#1a1a2e;border-radius:16px;padding:20px;min-width:80px}
+        .count-num{font-size:2.5rem;font-weight:900;color:var(--primary)}
+        .count-label{font-size:0.85rem;color:var(--light);margin-top:5px}
+
+        .schedule{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0}
+        .schedule h3{color:var(--gold);margin-bottom:15px;font-family:'Amiri',serif;font-size:1.3rem}
+        .schedule-table{width:100%;border-collapse:collapse}
+        .schedule-table th{background:rgba(20,184,166,0.2);color:#5eead4;padding:12px;text-align:right}
+        .schedule-table td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--light)}
+        .schedule-table tr:hover{background:rgba(255,255,255,0.03)}
+        .status-live{color:var(--danger);font-weight:700}
+        .status-upcoming{color:var(--primary);font-weight:700}
+        .status-done{color:#7cb342}
+        .join-btn{background:var(--primary);color:#fff;padding:6px 16px;border-radius:20px;text-decoration:none;font-size:0.85rem}
+        .join-btn:hover{background:#0d9488}
+
+        .past-sessions{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0}
+        .past-sessions h3{color:var(--gold);margin-bottom:15px;font-family:'Amiri',serif}
+        .session-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .session-item:last-child{border-bottom:none}
+        .session-title{color:#fff;font-weight:600}
+        .session-date{color:var(--light);font-size:0.85rem}
+        .watch-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:5px 14px;border-radius:20px;cursor:pointer;font-family:'Cairo'}
+        .watch-btn:hover{background:var(--gold);color:#1a1a1a}
+
+        .sig{background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid var(--gold);margin-top:30px}
+        .sig span{color:#888;font-size:0.7rem}
+        .sig strong{color:var(--gold)}
+        @media(max-width:600px){.countdown{gap:8px}.count-item{padding:12px;min-width:60px}.count-num{font-size:1.8rem}}
+    </style>
+</head>
+<body>
+
+<div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
+
+<<header class="header">
+    <img src="images/yemen-eagle.png" alt="Yemen" style="width:80px;">
+    <h1>📹 البث المباشر</h1>
+    <p style="color:#5eead4;">محاضرات تفاعلية - د. صلاح الأحمدل</p>
+</header>
+
+<div class="nav">
+    <a href="/">🏠 الرئيسية</a>
+    <a href="/report.html">📊 تقرير الأداء</a>
+    <a href="/decision-tree.html">🌳 شجرة القرارات</a>
+</div>
+
+<div class="container">
+
+    <!-- بث حالي -->
+    <div class="live-now" id="liveNow" style="display:none;">
+        <h2>🔴 البث مباشر الآن</h2>
+        <p>بروتوكول الإسهال في IMCI - الجفاف وعلاجه</p>
+        <span class="badge-live">● LIVE</span>
+        <div style="margin-top:15px;">
+            <a href="#" class="join-btn" style="background:#fff;color:var(--danger);font-weight:800;padding:10px 30px;">دخول المحاضرة</a>
+        </div>
+    </div>
+
+    <!-- عد تنازلي -->
+    <div class="countdown-card" id="countdownCard">
+        <h3>⏰ المحاضرة القادمة</h3>
+        <p style="color:var(--light);margin-bottom:10px;">بروتوكول علامات الخطر العامة (GDS)</p>
+        <p style="color:var(--gold);font-size:0.9rem;" id="targetDate">السبت 30 مايو 2026 - 10:00 ص</p>
+        <div class="countdown">
+            <div class="count-item">
+                <div class="count-num" id="days">00</div>
+                <div class="count-label">يوم</div>
+            </div>
+            <div class="count-item">
+                <div class="count-num" id="hours">00</div>
+                <div class="count-label">ساعة</div>
+            </div>
+            <div class="count-item">
+                <div class="count-num" id="minutes">00</div>
+                <div class="count-label">دقيقة</div>
+            </div>
+            <div class="count-item">
+                <div class="count-num" id="seconds">00</div>
+                <div class="count-label">ثانية</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الجدول الأسبوعي -->
+    <div class="schedule">
+        <h3>📅 جدول المحاضرات الأسبوعي</h3>
+        <table class="schedule-table">
+            <tr>
+                <th>اليوم</th>
+                <th>الموضوع</th>
+                <th>الوقت</th>
+                <th>الحالة</th>
+            </tr>
+            <tr>
+                <td>السبت</td>
+                <td>علامات الخطر العامة</td>
+                <td>10:00 ص</td>
+                <td class="status-upcoming">قادم</td>
+            </tr>
+            <tr>
+                <td>الأحد</td>
+                <td>بروتوكول السعال</td>
+                <td>10:00 ص</td>
+                <td class="status-upcoming">قادم</td>
+            </tr>
+            <tr>
+                <td>الاثنين</td>
+                <td>بروتوكول الإسهال</td>
+                <td>10:00 ص</td>
+                <td class="status-upcoming">قادم</td>
+            </tr>
+            <tr>
+                <td>الثلاثاء</td>
+                <td>بروتوكول الحمى</td>
+                <td>10:00 ص</td>
+                <td class="status-upcoming">قادم</td>
+            </tr>
+            <tr>
+                <td>الأربعاء</td>
+                <td>التغذية وفقر الدم</td>
+                <td>10:00 ص</td>
+                <td class="status-upcoming">قادم</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- المحاضرات السابقة -->
+    <div class="past-sessions">
+        <h3>📼 المحاضرات السابقة</h3>
+        <div class="session-item">
+            <div>
+                <div class="session-title">مقدمة في IMCI وتاريخها</div>
+                <div class="session-date">25 مايو 2026 - 45 دقيقة</div>
+            </div>
+            <button class="watch-btn">▶ مشاهدة</button>
+        </div>
+        <div class="session-item">
+            <div>
+                <div class="session-title">تقييم الطفل المريض</div>
+                <div class="session-date">27 مايو 2026 - 60 دقيقة</div>
+            </div>
+            <button class="watch-btn">▶ مشاهدة</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="sig">
+    <span>🌐 Engineered & Designed by</span><br>
+    <strong>Dr. Salah Al-Ahdal</strong><br>
+    <span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+
+<script>
+// عد تنازلي للمحاضرة القادمة (يمكن تعديل التاريخ)
+const targetDate = new Date('2026-05-30T10:00:00');
+
+function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+        document.getElementById('countdownCard').style.display = 'none';
+        document.getElementById('liveNow').style.display = 'block';
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>

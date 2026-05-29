@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="منصة التدريب الطبي الوطنية للرعاية التكاملية لصحة الطفل - الجمهورية اليمنية">
+<title>IMCI Yemen — منصة التدريب الطبي الوطنية</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700;800;900&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="/manifest.json">
+
+<style>
+:root {
+--yemen-red: #b91c1c; --yemen-black: #0f0f0f; --yemen-white: #ffffff;
+--teal-primary: #14b8a6; --teal-dark: #0f766e; --teal-light: #5eead4;
+--gold: #d4af37; --gold-light: #fbbf24;
+--glass-bg: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.1);
+--text-primary: #f8fafc; --text-secondary: #cbd5e1; --text-muted: #94a3b8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Cairo', 'Amiri', sans-serif;
+background: radial-gradient(circle at 100% 0%, rgba(20,184,166,0.15) 0%, transparent 35%),
+radial-gradient(circle at 0% 100%, rgba(15,118,110,0.2) 0%, transparent 35%),
+linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+color: var(--text-primary); min-height:100vh; line-height:1.7; overflow-x:hidden;
+}
+
+.official-header { background: linear-gradient(180deg, rgba(15,23,42,0.98) 0%, rgba(30,41,59,0.95) 100%); border-bottom:1px solid var(--glass-border); position:relative; overflow:hidden; }
+.flag-bar { display:flex; height:5px; width:100%; }
+.flag-bar .stripe { flex:1; }
+.flag-bar .red { background: linear-gradient(90deg, #991b1b, var(--yemen-red), #991b1b); }
+.flag-bar .white { background: linear-gradient(90deg, #e2e8f0, #ffffff, #e2e8f0); }
+.flag-bar .black { background: linear-gradient(90deg, #000000, #1a1a1a, #000000); }
+
+.header-inner { max-width:1200px; margin:0 auto; padding:25px 30px; display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap; }
+.emblem-wrap { display:flex; align-items:center; gap:35px; flex-wrap:wrap; justify-content:center; }
+.emblem-yemen { text-align:center; flex-shrink:0; }
+.emblem-yemen img { width:110px; filter:drop-shadow(0 8px 20px rgba(185,28,28,0.3)); transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.emblem-yemen img:hover { transform:scale(1.08) rotate(-2deg); }
+.emblem-yemen .label { display:block; margin-top:8px; font-family:'Amiri',serif; font-size:0.95rem; font-weight:700; color:var(--yemen-red); letter-spacing:1px; }
+.emblem-iimci { text-align:center; flex-shrink:0; }
+.emblem-iimci img { width:115px; border-radius:50%; border:3px solid rgba(20,184,166,0.4); box-shadow:0 8px 25px rgba(20,184,166,0.25); transition:all 0.4s; background:rgba(255,255,255,0.05); padding:3px; }
+.emblem-iimci img:hover { transform:scale(1.08) rotate(2deg); border-color:var(--teal-light); }
+.emblem-iimci .label { display:block; margin-top:8px; font-family:'Cairo',sans-serif; font-size:0.9rem; font-weight:800; color:var(--teal-light); letter-spacing:2px; }
+.header-divider { width:2px; height:100px; background:linear-gradient(180deg,transparent,var(--teal-primary),var(--gold),var(--teal-primary),transparent); opacity:0.4; border-radius:2px; }
+.header-text { text-align:center; flex:1; min-width:280px; }
+.header-text .rep-name { font-family:'Amiri',serif; font-size:1.6rem; font-weight:700; color:var(--yemen-red); margin-bottom:6px; letter-spacing:1px; }
+.header-text .ministry-name { font-family:'Amiri',serif; font-size:1.9rem; font-weight:700; color:var(--text-primary); margin-bottom:10px; }
+.header-text .platform-name { font-family:'Amiri',serif; font-size:1.25rem; font-weight:700; color:var(--teal-light); padding:8px 20px; background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:16px; display:inline-block; backdrop-filter:blur(10px); }
+.header-text .platform-en { font-family:'Cairo',sans-serif; font-size:0.85rem; font-weight:600; color:var(--text-muted); margin-top:8px; letter-spacing:1px; }
+
+.navbar { background:rgba(15,23,42,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--glass-border); position:sticky; top:0; z-index:1000; }
+.navbar-inner { max-width:1200px; margin:0 auto; padding:12px 30px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:15px; }
+.navbar-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.navbar-brand span { font-family:'Cairo',sans-serif; font-weight:800; font-size:1.1rem; color:var(--teal-light); }
+.nav-links { display:flex; gap:8px; flex-wrap:wrap; }
+.nav-links a { color:var(--text-secondary); text-decoration:none; padding:8px 16px; border-radius:20px; font-size:0.9rem; font-weight:600; transition:all 0.3s; border:1px solid transparent; }
+.nav-links a:hover { background:rgba(20,184,166,0.15); color:var(--teal-light); border-color:rgba(20,184,166,0.3); }
+.nav-links a.active { background:rgba(20,184,166,0.2); color:var(--teal-light); }
+
+.container { max-width:1100px; margin:0 auto; padding:40px 20px; }
+.hero { text-align:center; padding:60px 20px 50px; animation:fadeInUp 1s ease; position:relative; }
+.hero h1 { font-family:'Amiri',serif; font-size:3.2rem; font-weight:700; background:linear-gradient(135deg,var(--teal-light),var(--teal-primary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:15px; }
+.hero .subtitle { font-family:'Amiri',serif; font-size:1.5rem; font-weight:700; color:var(--text-primary); margin-bottom:10px; }
+.hero .desc { color:var(--text-secondary); font-size:1.15rem; margin:12px 0; max-width:600px; margin-left:auto; margin-right:auto; }
+.hero .supervisor { color:var(--text-muted); font-size:0.95rem; margin-top:15px; padding:10px 25px; background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:30px; display:inline-block; backdrop-filter:blur(10px); }
+
+.btn-group { margin-top:30px; display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:14px 32px; border-radius:30px; text-decoration:none; font-weight:700; font-size:1rem; transition:all 0.3s; border:none; cursor:pointer; }
+.btn-teal { background:linear-gradient(135deg,var(--teal-primary),var(--teal-dark)); color:white; box-shadow:0 8px 25px rgba(20,184,166,0.35); }
+.btn-teal:hover { transform:translateY(-3px); }
+.btn-outline { border:2px solid rgba(255,255,255,0.25); color:var(--text-primary); background:transparent; }
+.btn-outline:hover { background:rgba(255,255,255,0.08); transform:translateY(-3px); }
+.btn-gold { background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:#1a1a1a; box-shadow:0 8px 25px rgba(212,175,55,0.3); }
+.btn-gold:hover { transform:translateY(-3px); }
+
+.section-title { font-family:'Amiri',serif; font-size:2rem; font-weight:700; text-align:center; margin:50px 0 30px; color:var(--teal-light); }
+.section-title::after { content:''; display:block; width:80px; height:4px; background:linear-gradient(90deg,var(--teal-primary),var(--gold)); margin:12px auto 0; border-radius:2px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; margin:30px 0; }
+.card { background:var(--glass-bg); backdrop-filter:blur(20px); border:1px solid var(--glass-border); border-radius:24px; padding:35px 30px; text-align:center; transition:all 0.4s; }
+.card:hover { transform:translateY(-8px); background:rgba(255,255,255,0.1); }
+.card .icon { font-size:55px; margin-bottom:18px; }
+.card h3 { font-family:'Amiri',serif; font-size:1.4rem; font-weight:700; color:var(--teal-light); margin-bottom:12px; }
+.card p { color:var(--text-secondary); font-size:1rem; line-height:1.7; margin-bottom:20px; }
+
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:20px; margin:30px 0; }
+.stat { background:var(--glass-bg); backdrop-filter:blur(15px); border:1px solid var(--glass-border); border-radius:20px; padding:30px 20px; text-align:center; transition:all 0.3s; }
+.stat:hover { transform:translateY(-5px); }
+.stat-num { font-family:'Cairo',sans-serif; font-size:2.5rem; font-weight:900; color:var(--teal-light); }
+.stat-label { color:var(--text-secondary); font-size:0.95rem; }
+
+.footer { background:linear-gradient(180deg,rgba(15,23,42,0.5) 0%,rgba(15,23,42,0.95) 100%); border-top:1px solid var(--glass-border); padding:40px 20px 30px; text-align:center; }
+</div>
+<div class="header-inner">
+<div class="emblem-wrap">
+<div class="emblem-yemen">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Emblem_of_Yemen.svg/800px-Emblem_of_Yemen.svg.png" alt="النسر الجمهوري" onerror="this.src='images/yemen-emblem.png'">
+<span class="label">الجمهورية اليمنية</span>
+</div>
+<div class="header-divider"></div>
+<div class="emblem-iimci">
+<div style="width:115px;height:115px;border-radius:50%;background:linear-gradient(135deg,var(--teal-primary),var(--teal-dark));display:flex;align-items:center;justify-content:center;font-size:55px;border:3px solid rgba(20,184,166,0.4);">🏥</div>
+<span class="label">IMCI</span>
+</div>
+</div>
+<div class="header-text">
+<div class="rep-name">الجمهورية اليمنية</div>
+<div class="ministry-name">وزارة الصحة والبيئة</div>
+<div class="platform-name">منصة التدريب الطبي الوطنية للرعاية التكاملية لصحة الطفل</div>
+<div class="platform-en">National Medical Training Platform — IMCI</div>
+</div>
+</div>
+</header>
+
+<nav class="navbar">
+<div class="navbar-inner">
+<a href="/" class="navbar-brand"><span>IMCI Yemen</span></a>
+<div class="nav-links">
+<a href="/" class="active">🏠 الرئيسية</a>
+<a href="/login">🔐 دخول</a>
+<a href="/dashboard">📊 لوحة التحكم</a>
+<a href="/exam">✅ اختبارات</a>
+<a href="/live-room">📹 بث مباشر</a>
+<a href="/certificate">🏆 شهادات</a>
+<a href="/search">🔍 بحث</a>
+</div>
+</div>
+</nav>
+
+<div class="container">
+<section class="hero">
+<h1>🏥 IMCI Yemen</h1>
+<div class="subtitle">منصة التدريب الطبي للرعاية التكاملية لصحة الطفل</div>
+<div class="desc">منصة تفاعلية متكاملة لتدريب الكوادر الطبية على بروتوكولات الرعاية الصحية للأطفال</div>
+<div class="supervisor">تحت إشراف وزارة الصحة والبيئة — الجمهورية اليمنية</div>
+<div class="btn-group">
+<a href="/login" class="btn btn-teal">🔐 تسجيل الدخول</a>
+<a href="/dashboard" class="btn btn-outline">📊 لوحة التحكم</a>
+<a href="/live-room" class="btn btn-gold">📹 البث المباشر</a>
+</div>
+</section>
+
+<h2 class="section-title">خدمات المنصة</h2>
+<div class="grid">
+<div class="card"><span class="icon">📚</span><h3>3 مستويات تدريبية</h3><p>أساسي | متوسط | متقدم<br>محتوى تدريبي منظم ومُعتمَد</p><a href="/lesson" class="btn btn-teal">ابدأ التعلم</a></div>
+<div class="card"><span class="icon">📹</span><h3>بث مباشر تفاعلي</h3><p>محاضرات تفاعلية مع المدربين<br>وورش عمل مباشرة</p><a href="/live-room" class="btn btn-outline">انضم الآن</a></div>
+<div class="card"><span class="icon">🏆</span><h3>شهادات معتمدة</h3><p>شهادات رقمية من وزارة الصحة<br>مع QR Code للتحقق</p><a href="/certificate" class="btn btn-gold">عرض الشهادات</a></div>
+</div>
+
+<h2 class="section-title">إحصائيات المنصة</h2>
+<div class="stats">
+<div class="stat"><div class="stat-num">500+</div><div class="stat-label">متدرب مسجل</div></div>
+<div class="stat"><div class="stat-num">3</div><div class="stat-label">مستويات تدريب</div></div>
+<div class="stat"><div class="stat-num">30+</div><div class="stat-label">ساعة تدريب</div></div>
+<div class="stat"><div class="stat-num">88%</div><div class="stat-label">نسبة النجاح</div></div>
+</div>
+</div>
+
+<footer class="footer">
+<div style="color:var(--text-muted);">© 2026 IMCI Yemen Platform — Ministry of Public Health & Environment</div>
+<div style="color:var(--teal-light);margin-top:5px;">الجمهورية اليمنية — وزارة الصحة والبيئة</div>
+<div style="background: linear-gradient(145deg, #0d2b1e, #061a10); padding: 16px 20px; display: flex; align-items: center; justify-content: center; gap: 16px; border-top: 1px solid rgba(212,175,55,0.15); box-shadow: 0 -5px 30px rgba(0,0,0,0.3); margin-top: 30px;">
+<div style="width: 44px; height: 44px; background: linear-gradient(145deg, #0d4a2e, #083820); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(13,74,46,0.4); border: 2px solid #d4af37; flex-shrink: 0;">
+<span style="font-size: 20px;">💻</span>
+</div>
+<div style="text-align: center;">
+<span style="display: block; font-size: 0.65rem; color: rgba(124,179,66,0.7); letter-spacing: 1px; margin-top: 2px;">Full-Stack Developer & Medical Systems Architect</span>
+</div>
+</div>
+</footer>
+
+<script>
+if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js");}
+</script>
+</body>
+</html>

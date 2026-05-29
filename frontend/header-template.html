@@ -1,0 +1,193 @@
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;600;700;800;900&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+--yemen-red: #b91c1c;
+--yemen-black: #1a1a1a;
+--yemen-white: #ffffff;
+--medical-teal: #0d9488;
+--medical-dark: #134e4a;
+--medical-light: #f0fdfa;
+--gold: #b45309;
+--gold-light: #fbbf24;
+--text-primary: #0f172a;
+--text-secondary: #334155;
+--shadow-soft: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+.platform-header {
+background: #ffffff;
+border-radius: 0 0 32px 32px;
+box-shadow: var(--shadow-soft);
+width: 100%;
+overflow: hidden;
+border: 1px solid rgba(13, 148, 136, 0.08);
+}
+
+.flag-bar {
+display: flex; height: 8px; width: 100%;
+}
+.flag-red { flex: 1; background: linear-gradient(90deg, #991b1b, #b91c1c, #991b1b); }
+.flag-white { flex: 1; background: linear-gradient(90deg, #f1f5f9, #ffffff, #f1f5f9); }
+.flag-black { flex: 1; background: linear-gradient(90deg, #0f0f0f, #1a1a1a, #0f0f0f); }
+
+.header-content {
+padding: 30px 35px 35px;
+display: flex; flex-direction: column;
+align-items: center; gap: 25px;
+}
+
+.logos-section {
+display: flex; align-items: center;
+justify-content: center; gap: 40px; flex-wrap: wrap;
+}
+
+.emblem-yemen img {
+width: 140px; height: auto;
+filter: drop-shadow(0 8px 20px rgba(185, 28, 28, 0.25));
+}
+.emblem-iimci img {
+width: 120px; border-radius: 50%;
+box-shadow: 0 8px 25px rgba(13, 148, 136, 0.3);
+border: 4px solid white; background: white;
+}
+.emblem-label {
+display: inline-block; margin-top: 10px;
+background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+color: white; font-family: 'Amiri', serif;
+font-size: 1rem; font-weight: 700;
+padding: 4px 16px; border-radius: 20px;
+}
+.emblem-iimci .label {
+display: inline-block; margin-top: 10px;
+background: linear-gradient(135deg, #0d9488, #0f766e);
+color: white; font-family: 'Cairo', sans-serif;
+font-size: 0.9rem; font-weight: 800;
+padding: 4px 16px; border-radius: 20px;
+}
+
+.logo-divider {
+width: 2px; height: 100px;
+background: linear-gradient(180deg, transparent, #0d9488, #fbbf24, #0d9488, transparent);
+opacity: 0.5; border-radius: 2px;
+}
+
+.text-section { text-align: center; width: 100%; }
+
+.republic-name {
+display: inline-block;
+background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+color: white; font-family: 'Amiri', serif;
+font-size: 1.5rem; font-weight: 700;
+padding: 8px 35px; border-radius: 30px;
+margin-bottom: 12px;
+}
+
+.ministry-name {
+color: #0f172a; font-family: 'Amiri', serif;
+font-size: 1.8rem; font-weight: 700;
+margin-bottom: 10px;
+}
+
+.gold-divider {
+width: 100px; height: 4px;
+background: linear-gradient(90deg, transparent, #fbbf24, #b45309, #fbbf24, transparent);
+margin: 15px auto; border-radius: 2px;
+}
+
+.platform-card {
+background: linear-gradient(145deg, #f0fdfa, #ffffff);
+border: 2px solid rgba(13, 148, 136, 0.12);
+border-radius: 20px; padding: 25px 30px;
+max-width: 600px; margin: 0 auto;
+}
+
+.platform-title {
+color: #0f172a; font-family: 'Amiri', serif;
+font-size: 1.5rem; font-weight: 700;
+margin-bottom: 8px; line-height: 1.6;
+}
+
+.platform-subtitle {
+color: #0d9488; font-family: 'Cairo', sans-serif;
+font-size: 1.1rem; font-weight: 800;
+letter-spacing: 2px;
+}
+
+.platform-desc {
+color: #334155; font-family: 'Amiri', serif;
+font-size: 1rem; margin-top: 10px;
+line-height: 1.8;
+}
+
+.footer-bar {
+background: linear-gradient(90deg, #134e4a, #0d9488, #134e4a);
+padding: 12px; text-align: center; color: white;
+font-family: 'Amiri', serif; font-size: 1rem;
+font-weight: 700;
+}
+
+@media (max-width: 768px) {
+.header-content { padding: 20px 15px 25px; }
+.logos-section { gap: 20px; }
+.emblem-yemen img { width: 100px; }
+.emblem-iimci img { width: 90px; }
+.logo-divider { height: 70px; }
+.republic-name { font-size: 1.2rem; padding: 6px 20px; }
+.ministry-name { font-size: 1.3rem; }
+.platform-title { font-size: 1.2rem; }
+.platform-card { padding: 18px 20px; }
+}
+
+@media (max-width: 480px) {
+.logos-section { flex-direction: column; gap: 15px; }
+.logo-divider { width: 80px; height: 2px; }
+.emblem-yemen img { width: 80px; }
+.emblem-iimci img { width: 70px; }
+.republic-name { font-size: 1rem; }
+.ministry-name { font-size: 1.1rem; }
+}
+</style>
+
+<header class="platform-header">
+<div class="flag-bar">
+<div class="flag-red"></div>
+<div class="flag-white"></div>
+<div class="flag-black"></div>
+</div>
+
+<div class="header-content">
+<div class="logos-section">
+<div class="emblem-yemen">
+<img src="images/yemen-emblem.png" alt="النسر الجمهوري"
+onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Emblem_of_Yemen.svg/400px-Emblem_of_Yemen.svg.png'">
+<span class="emblem-label">الجمهورية اليمنية</span>
+</div>
+
+<div class="logo-divider"></div>
+
+<div class="emblem-iimci">
+<div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#0d9488,#134e4a);display:flex;align-items:center;justify-content:center;font-size:55px;border:4px solid white;box-shadow:0 8px 25px rgba(13,148,136,0.3);">🏥</div>
+<span class="label">IMCI</span>
+</div>
+</div>
+
+<div class="text-section">
+<div class="republic-name">الجمهورية اليمنية</div>
+<h1 class="ministry-name">وزارة الصحة العامة والبيئة</h1>
+<div class="gold-divider"></div>
+
+<div class="platform-card">
+<div class="platform-title">منصة التدريب الطبي للرعاية التكاملية لصحة الطفل</div>
+<div class="platform-subtitle">IMCI - Integrated Management of Childhood Illness</div>
+<div class="platform-desc">
+منصة تفاعلية متكاملة لتدريب الكوادر الطبية على بروتوكولات الرعاية الصحية للأطفال
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-bar">
+تحت إشراف وزارة الصحة العامة والبيئة — الجمهورية اليمنية
+</div>
+</header>

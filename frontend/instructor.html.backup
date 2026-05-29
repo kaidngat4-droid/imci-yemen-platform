@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة المدرب - IMCI Yemen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Cairo',sans-serif; background:#0f172a; color:white; min-height:100vh; }
+        .header { background:rgba(255,255,255,0.05); backdrop-filter:blur(15px); padding:15px 20px; text-align:center; border-bottom:2px solid #d4af37; }
+        .header h2 { color:#d4af37; }
+        .container { max-width:1000px; margin:30px auto; padding:20px; }
+        .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:15px; margin-bottom:25px; }
+        .stat { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:25px; text-align:center; }
+        .stat-num { font-size:32px; font-weight:900; color:#5eead4; }
+        .card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:20px; margin-bottom:20px; }
+        table { width:100%; border-collapse:collapse; }
+        th { background:rgba(255,255,255,0.1); padding:12px; text-align:right; color:#d4af37; }
+        td { padding:12px; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; }
+        .badge-ok { background:#c6f6d5; color:#22543d; }
+        .btn { display:inline-block; padding:12px 25px; border-radius:25px; text-decoration:none; font-weight:700; margin:5px; background:#14b8a6; color:white; }
+        .denied { text-align:center; padding:60px; display:none; }
+        .denied h1 { color:#ef4444; font-size:3rem; }
+    </style>
+</head>
+<body>
+
+<div id="authorized">
+    <div class="header"><h2>👨‍🏫 لوحة تحكم المدرب</h2></div>
+    <div class="container">
+        <div class="stats">
+            <div class="stat"><div class="stat-num">6</div><div>متدربين</div></div>
+            <div class="stat"><div class="stat-num">3</div><div>دورات</div></div>
+            <div class="stat"><div class="stat-num">82%</div><div>متوسط الدرجات</div></div>
+            <div class="stat"><div class="stat-num">3</div><div>محاضرات</div></div>
+        </div>
+        <div class="card">
+            <h3>👥 المتدربين</h3>
+            <table>
+                <tr><th>الاسم</th><th>البريد</th><th>التقدم</th><th>الحالة</th></tr>
+                <tr><td>د. محمد اليمني</td><td>doctor@imci-ye.org</td><td>65%</td><td><span class="badge badge-ok">نشط</span></td></tr>
+                <tr><td>د. عبد الهادي</td><td>Drabdulhadimuhammed@gmail.com</td><td>30%</td><td><span class="badge badge-ok">نشط</span></td></tr>
+            </table>
+        </div>
+        <a href="/dashboard" class="btn">← العودة</a>
+    </div>
+</div>
+
+<div id="denied" class="denied">
+    <div style="font-size:80px;">🚫</div>
+    <h1>غير مصرح</h1>
+    <p>هذه الصفحة للمدربين فقط</p>
+    <a href="/login" class="btn">تسجيل الدخول</a>
+</div>
+
+<script>
+const u=JSON.parse(localStorage.getItem('user')||'{}');
+if(!localStorage.getItem('token')||!['admin','instructor'].includes(u.role)){
+    document.getElementById('authorized').style.display='none';
+    document.getElementById('denied').style.display='block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم - IMCI Yemen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Cairo',sans-serif; background: radial-gradient(circle at top,#14b8a6,transparent 30%),#0f172a; color:white; min-height:100vh; }
+.header { background:rgba(255,255,255,0.05); backdrop-filter:blur(15px); padding:15px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.header h2 { color:#5eead4; }
+.container { max-width:1000px; margin:30px auto; padding:20px; }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; margin-bottom:25px; }
+.stat { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:20px; text-align:center; }
+.stat-num { font-size:30px; font-weight:900; color:#5eead4; }
+.card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:20px; margin-bottom:20px; }
+.btn { display:inline-block; padding:12px 22px; border-radius:25px; text-decoration:none; font-weight:700; margin:5px; }
+.btn-teal { background:#14b8a6; color:white; }
+.btn-outline { border:2px solid rgba(255,255,255,0.3); color:white; }
+</style>
+</head>
+<body>
+
+<div class="header">
+<h2>📊 لوحة التحكم</h2>
+<span id="un"></span>
+</div>
+
+<div class="container">
+<div class="stats">
+<div class="stat"><div class="stat-num">2</div><div>الدورات</div></div>
+<div class="stat"><div class="stat-num" style="color:#4ade80;">1</div><div>مكتملة</div></div>
+<div class="stat"><div class="stat-num" style="color:#fbbf24;">1</div><div>شهادة</div></div>
+<div class="stat"><div class="stat-num" style="color:#a78bfa;">24</div><div>ساعة</div></div>
+</div>
+
+<div class="card">
+<h3>📚 دوراتي</h3>
+<p style="margin:10px 0;">✅ أساسيات IMCI - مكتمل</p>
+<p style="margin:10px 0;">🔄 الأمراض الشائعة - 40%</p>
+</div>
+
+<div style="text-align:center;">
+<a href="/lesson" class="btn btn-teal">📝 الدرس</a>
+<a href="/exam" class="btn btn-teal">✅ اختبار</a>
+<a href="/live-room" class="btn btn-outline">📹 بث</a>
+<a href="/certificate" class="btn btn-outline">🏆 شهادة</a>
+<a href="/" class="btn btn-outline">🏠 رئيسية</a>
+</div>
+</div>
+
+<script>
+const u=JSON.parse(localStorage.getItem('user')||'{}');
+if(u.firstName)document.getElementById('un').textContent='👤 '+u.firstName;
+</script>
+<div style="background:#0d2b1e;padding:16px;text-align:center;border-top:1px solid #d4af37;margin-top:30px;">
+<span style="color:#888;font-size:0.7rem;">🌐 Engineered </body> Designed by</span><br>
+<span style="color:#d4af37;font-weight:bold;">Dr. Salah Al-Ahdal</span><br>
+<span style="color:#7cb342;font-size:0.65rem;">Full-Stack Developer </body> Medical Systems Architect</span>
+</div>
+</body>
+</html>
