@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملاحظات - IMCI Yemen</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif;background:#0f172a;color:#fff;min-height:100vh;padding:20px}
+        .container{max-width:800px;margin:auto}
+        h1{color:#d4af37;text-align:center;margin:20px 0}
+        textarea{width:100%;height:300px;background:#1a1a2e;color:#fff;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:15px;font-family:'Cairo',sans-serif;font-size:16px;resize:vertical}
+        .btn{display:inline-block;padding:12px 25px;background:#14b8a6;color:#fff;border-radius:30px;text-decoration:none;font-weight:700;margin:10px 5px;border:none;cursor:pointer}
+        .btn-save{background:#d4af37;color:#1a1a1a}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📝 دفتر الملاحظات</h1>
+    <textarea id="notes" placeholder="اكتب ملاحظاتك هنا...">مرحباً بك في دفتر ملاحظات IMCI Yemen</textarea>
+    <button class="btn btn-save" onclick="saveNotes()">💾 حفظ</button>
+    <a href="https://kaidngat4-droid.github.io/imci-yemen-platform/" class="btn">🏠 الرئيسية</a>
+</div>
+<script>
+const notes=document.getElementById('notes');
+notes.value=localStorage.getItem('imci-notes')||'';
+function saveNotes(){localStorage.setItem('imci-notes',notes.value);alert('✅ تم الحفظ');}
+</script>
+</body>
+</html>
