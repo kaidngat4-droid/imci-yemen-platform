@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقدم الدروس - IMCI Yemen</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--p:#14b8a6;--g:#d4af37;--d:#0f172a;--l:#cbd5e1}
+        body{font-family:'Cairo',sans-serif;background:var(--d);color:#fff;min-height:100vh;padding:20px}
+        .container{max-width:800px;margin:auto}
+        h1{font-family:'Amiri',serif;color:var(--g);text-align:center;margin:30px 0}
+        .level-card{background:rgba(255,255,255,0.06);border-radius:20px;padding:25px;margin:20px 0;border-right:4px solid var(--p)}
+        .level-card.completed{border-right-color:#22c55e}
+        .level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+        .level-title{color:var(--p);font-family:'Amiri',serif;font-size:1.3rem}
+        .level-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700}
+        .badge-done{background:rgba(34,197,94,0.2);color:#22c55e}
+        .badge-progress{background:rgba(20,184,166,0.2);color:var(--p)}
+        .lesson-list{list-style:none}
+        .lesson-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;transition:0.3s}
+        .lesson-item:hover{background:rgba(255,255,255,0.03)}
+        .checkbox{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;transition:0.3s;flex-shrink:0}
+        .checkbox.done{background:#22c55e;border-color:#22c55e;color:#fff}
+        .lesson-text{flex:1}
+        .lesson-done{text-decoration:line-through;color:#666}
+        .progress-bar{width:100%;height:8px;background:rgba(255,255,255,0.1);border-radius:10px;margin:15px 0;overflow:hidden}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--p),#22c55e);border-radius:10px;transition:0.5s}
+        .back-btn{display:inline-block;padding:12px 25px;background:var(--p);color:#fff;border-radius:30px;text-decoration:none;font-weight:700;margin-top:20px}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📚 تقدم الدروس</h1>
+
+    <div class="level-card" id="level1">
+        <div class="level-header">
+            <div class="level-title">المستوى الأول - أساسيات IMCI</div>
+            <span class="level-badge badge-progress" id="badge1">قيد التقدم</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress1" style="width:0%"></div></div>
+        <ul class="lesson-list">
+            <li class="lesson-item" onclick="toggleLesson(this,'l1')">
+                <div class="checkbox" id="l1">✓</div>
+                <span class="lesson-text">مقدمة في IMCI</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l2')">
+                <div class="checkbox" id="l2">✓</div>
+                <span class="lesson-text">تقييم الطفل المريض</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l3')">
+                <div class="checkbox" id="l3">✓</div>
+                <span class="lesson-text">علامات الخطر العامة</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l4')">
+                <div class="checkbox" id="l4">✓</div>
+                <span class="lesson-text">السعال وصعوبة التنفس</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l5')">
+                <div class="checkbox" id="l5">✓</div>
+                <span class="lesson-text">الإسهال والجفاف</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="level-card" id="level2">
+        <div class="level-header">
+            <div class="level-title">المستوى الثاني - الأمراض الشائعة</div>
+            <span class="level-badge badge-progress" id="badge2">قيد التقدم</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress2" style="width:0%"></div></div>
+        <ul class="lesson-list">
+            <li class="lesson-item" onclick="toggleLesson(this,'l6')">
+                <div class="checkbox" id="l6">✓</div>
+                <span class="lesson-text">الحمى والملاريا</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l7')">
+                <div class="checkbox" id="l7">✓</div>
+                <span class="lesson-text">سوء التغذية</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l8')">
+                <div class="checkbox" id="l8">✓</div>
+                <span class="lesson-text">فقر الدم</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l9')">
+                <div class="checkbox" id="l9">✓</div>
+                <span class="lesson-text">التحصينات</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l10')">
+                <div class="checkbox" id="l10">✓</div>
+                <span class="lesson-text">رعاية المواليد</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="level-card" id="level3">
+        <div class="level-header">
+            <div class="level-title">المستوى الثالث - التدريب العملي</div>
+            <span class="level-badge badge-progress" id="badge3">قيد التقدم</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress3" style="width:0%"></div></div>
+        <ul class="lesson-list">
+            <li class="lesson-item" onclick="toggleLesson(this,'l11')">
+                <div class="checkbox" id="l11">✓</div>
+                <span class="lesson-text">حالات طوارئ الأطفال</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l12')">
+                <div class="checkbox" id="l12">✓</div>
+                <span class="lesson-text">الإنعاش القلبي الرئوي</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l13')">
+                <div class="checkbox" id="l13">✓</div>
+                <span class="lesson-text">محاكاة سريرية</span>
+            </li>
+            <li class="lesson-item" onclick="toggleLesson(this,'l14')">
+                <div class="checkbox" id="l14">✓</div>
+                <span class="lesson-text">التقييم النهائي</span>
+            </li>
+        </ul>
+    </div>
+
+    <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+</div>
+
+<script>
+// تحميل الحالة المحفوظة
+document.querySelectorAll('.checkbox').forEach(cb => {
+    const saved = localStorage.getItem('lesson-' + cb.id);
+    if (saved === 'done') {
+        cb.classList.add('done');
+        cb.parentElement.querySelector('.lesson-text').classList.add('lesson-done');
+    }
+});
+updateAllProgress();
+
+function toggleLesson(el, id) {
+    const cb = document.getElementById(id);
+    cb.classList.toggle('done');
+    el.querySelector('.lesson-text').classList.toggle('lesson-done');
+    
+    // حفظ الحالة
+    const isDone = cb.classList.contains('done');
+    localStorage.setItem('lesson-' + id, isDone ? 'done' : '');
+    
+    updateAllProgress();
+}
+
+function updateAllProgress() {
+    [1,2,3].forEach(level => {
+        const total = document.querySelectorAll('#level' + level + ' .checkbox').length;
+        const done = document.querySelectorAll('#level' + level + ' .checkbox.done').length;
+        const pct = Math.round((done / total) * 100);
+        
+        document.getElementById('progress' + level).style.width = pct + '%';
+        
+        const badge = document.getElementById('badge' + level);
+        if (pct === 100) {
+            badge.textContent = '✅ مكتمل';
+            badge.className = 'level-badge badge-done';
+            document.getElementById('level' + level).classList.add('completed');
+        } else if (pct > 0) {
+            badge.textContent = '🔄 ' + pct + '%';
+            badge.className = 'level-badge badge-progress';
+        }
+    });
+}
+</script>
+</body>
+</html>
