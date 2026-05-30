@@ -37,7 +37,7 @@
         .protocol-section .treatment strong { color:var(--primary); }
         .protocol-section .note { background:rgba(245,158,11,0.15); border-right:4px solid var(--warning); padding:15px; border-radius:12px; margin:15px 0; font-size:0.9rem; }
         
-        .back-top { position:fixed; bottom:20px; left:20px; background:var(--primary); color:#fff; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; box-shadow:0 4px 15px rgba(0,0,0,0.4); }
+        .back-top { position:fixed; bottom:20px; left:20px; background:var(--primary); color:#fff; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; box-shadow:0 4px 15px rgba(0,0,0,0.4); cursor:pointer; border:none; }
         .sig { background:#0d2b1e; padding:16px; text-align:center; border-top:1px solid var(--gold); margin-top:30px; }
         .sig span { color:#888; font-size:0.7rem; }
         .sig strong { color:var(--gold); }
@@ -48,16 +48,16 @@
 
 <div class="flag"><div class="flag-r"></div><div class="flag-w"></div><div class="flag-b"></div></div>
 
-<header class="header">
+<<header class="header">
     <img src="images/yemen-eagle.png" alt="Yemen" style="width:80px;">
     <h1>📋 بروتوكولات IMCI للعلاج</h1>
     <p style="color:#5eead4;">الرعاية التكاملية لصحة الطفل - WHO 2022</p>
 </header>
 
-<nav class="nav">
-    <a href="/">🏠 الرئيسية</a>
-    <a href="/decision-tree.html">🌳 شجرة القرارات</a>
-    <a href="/age-calculator.html">🧮 حاسبة العمر</a>
+<<nav class="nav">
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="decision-tree.html">🌳 شجرة القرارات</a>
+    <a href="age-calculator.html">🧮 حاسبة العمر</a>
 </nav>
 
 <div class="container">
@@ -81,7 +81,7 @@
         <ul>
             <li>عدم قدرة الطفل على الشرب أو الرضاعة</li>
             <li>نوبات صرع / اختلاجات</li>
-            <li>غيبوبة أو فقدان الوعي / لethargic</li>
+            <li>غيبوبة أو فقدان الوعي / خمول شديد (Lethargic)</li>
             <li>استفراغ كل شيء (Everything)</li>
             <li>صعوبة شديدة في التنفس</li>
         </ul>
@@ -102,7 +102,7 @@
         <h3>التقييم:</h3>
         <ul>
             <li>عدد الأنفاس في الدقيقة (RR): 
-                <br>• < 2 شهر: ≥ 60 | • 2-12 شهر: ≥ 50 | • 1-5 سنة: ≥ 40
+                <br>• &lt; 2 شهر: ≥ 60 | • 2-12 شهر: ≥ 50 | • 1-5 سنة: ≥ 40
             </li>
             <li>صداع في الصدر (Chest indrawing)</li>
             <li>أصوات طبيعية (Stridor)</li>
@@ -138,7 +138,7 @@
                 <li><strong>لا جفاف:</strong> ORS 50-100ml بعد كل برازة + استمرار الرضاعة</li>
                 <li><strong>جفاف بعض:</strong> ORS 75ml/kg خلال 4 ساعات في العيادة</li>
                 <li><strong>إسهال دموي:</strong> سيبروفلوكساسين (3 أيام) + زنك (10-14 يوم)</li>
-                <li><strong>زنك:</strong> 10mg يومياً لمدة 10-14 يوماً للأطفال < 6 شهور: 10mg</li>
+                <li><strong>زنك:</strong> 10mg يومياً لمدة 10-14 يوماً للأطفال &lt; 6 شهور: 10mg</li>
             </ul>
         </div>
         <div class="note">
@@ -174,8 +174,8 @@
         <h2>🍎 بروتوكول التغذية</h2>
         <h3>التقييم:</h3>
         <ul>
-            <li>الوزن للعمر (WFA) < -2Z → تقزم</li>
-            <li>الوزن للطول (WFH) < -2Z → هزال</li>
+            <li>الوزن للعمر (WFA) &lt; -2Z → تقزم</li>
+            <li>الوزن للطول (WFH) &lt; -2Z → هزال</li>
             <li>الوذمة (Bilateral pitting edema) → سوء تغذية حاد مع وذمة</li>
         </ul>
         <div class="urgent">
@@ -211,13 +211,13 @@
             </ul>
         </div>
         <div class="note">
-            ⚠️ فقر الدم الشديد (Hb < 7g/dl) مع علامات قصور القلب → احال
+            ⚠️ فقر الدم الشديد (Hb &lt; 7g/dl) مع علامات قصور القلب → احال
         </div>
     </div>
 
 </div>
 
-<a href="./" class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">⬆️</a>
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">⬆️</button>
 
 <div class="sig">
     <span>🌐 Engineered & Designed by</span><br>
