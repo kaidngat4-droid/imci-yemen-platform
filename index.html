@@ -408,9 +408,16 @@
             html { scroll-behavior:auto; }
         }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.splash{position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#0b1120,#134e4a);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s,visibility 0.5s}.splash.hide{opacity:0;visibility:hidden}.splash img{width:120px;animation:pulse 2s infinite}.splash h2{color:#d4af37;font-family:Amiri,serif;margin-top:20px;font-size:1.8rem}.splash p{color:#5eead4;margin-top:10px}.splash .loader{width:60px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin-top:30px;overflow:hidden}.splash .loader div{height:100%;background:#14b8a6;animation:load 1.5s ease-in-out;border-radius:2px}@keyframes load{0%{width:0}100%{width:100%}}
 </style>
 </head>
 <body>
+<div class="splash" id="splash">
+<img src="images/yemen-eagle.png" alt="IMCI Yemen">
+<h2>IMCI Yemen</h2>
+<p>منصة التدريب الطبي</p>
+<div class="loader"><div></div></div>
+</div>
 
     <!-- Skip Link -->
     <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
@@ -659,7 +666,7 @@ function toggleDark() {
             initActiveNav();
             initKeyboard();
 
-            console.log("%c[IMCI Yemen]","color:#14b8a6;font-weight:bold;font-size:14px;","Platform v2.0 loaded");
+            setTimeout(()=>{document.getElementById("splash").classList.add("hide");setTimeout(()=>{let s=document.getElementById("splash");if(s)s.remove();},500);},2000);
             showToast("👋 مرحباً بك في منصة IMCI Yemen");
         });
 
