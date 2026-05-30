@@ -511,6 +511,7 @@
         <a href="decision-tree.html" title="شجرة القرارات">🌳</a>
         <a href="protocol.html" title="البروتوكولات">📋</a>
         <a href="quiz.html" title="اختبارات" class="gold">✅</a>
+        <a href="#" onclick="toggleFocus();return false;" title="وضع التركيز" style="background:#7c3aed;color:#fff;">📖</a>
     </nav>
 
     <!-- Controls -->
@@ -571,7 +572,8 @@
         }
 
         // ─── Theme Manager ───
-        function toggleDark() {
+        function toggleFocus(){let s=document.querySelector(".sidebar"),c=document.querySelector(".ctrl"),sl=document.querySelector(".sl"),sr=document.querySelector(".sr");[s,c,sl,sr].forEach(el=>{if(el)el.style.display=el.style.display==="none"?"flex":"none";});return false;}
+function toggleDark() {
             const body = document.body;
             const btn = document.getElementById('theme-btn');
             const isLight = body.classList.toggle('light-mode');
