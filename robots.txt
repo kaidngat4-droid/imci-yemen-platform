@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kaidngat4-droid.github.io/imci-yemen-platform/sitemap.xml
