@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المفضلة - IMCI Yemen</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--p:#14b8a6;--g:#d4af37;--d:#0f172a;--l:#cbd5e1}
+        body{font-family:'Cairo',sans-serif;background:var(--d);color:#fff;min-height:100vh;padding:20px}
+        .container{max-width:700px;margin:auto}
+        h1{font-family:'Amiri',serif;color:var(--g);text-align:center;margin:30px 0}
+        .card{background:rgba(255,255,255,0.06);border-radius:16px;padding:20px;margin:15px 0;display:flex;align-items:center;gap:15px;transition:0.3s}
+        .card:hover{background:rgba(255,255,255,0.1)}
+        .card .icon{font-size:35px;flex-shrink:0}
+        .card .info{flex:1}
+        .card h3{color:#5eead4;margin-bottom:5px}
+        .card p{color:var(--l);font-size:0.85rem}
+        .card .actions{display:flex;gap:8px}
+        .btn{display:inline-block;padding:8px 16px;border-radius:20px;text-decoration:none;font-weight:700;font-size:13px;border:none;cursor:pointer}
+        .btn-visit{background:var(--p);color:#fff}
+        .btn-delete{background:#ef4444;color:#fff}
+        .empty{text-align:center;padding:50px;color:#666}
+        .empty .icon{font-size:60px;margin-bottom:15px}
+        .back-btn{display:inline-block;padding:12px 25px;background:var(--p);color:#fff;border-radius:30px;text-decoration:none;font-weight:700;margin-top:20px}
+        .toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;z-index:10004;opacity:0;transition:0.3s;border:1px solid var(--g)}
+        .toast.show{opacity:1}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🔖 المفضلة</h1>
+    <div id="bookmarksList"></div>
+    <div class="empty" id="emptyState">
+        <div class="icon">📭</div>
+        <h3>لا توجد إشارات مرجعية</h3>
+        <p>يمكنك إضافة الصفحات المهمة من خلال النقر على زر 🔖</p>
+    </div>
+    <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+function loadBookmarks() {
+    const bookmarks = JSON.parse(localStorage.getItem('imci-bookmarks') || '[]');
+    const list = document.getElementById('bookmarksList');
+    const empty = document.getElementById('emptyState');
+    
+    if (bookmarks.length === 0) {
+        list.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    
+    empty.style.display = 'none';
+    list.innerHTML = bookmarks.map((b, i) => `
+        <div class="card">
+            <div class="icon">${b.icon || '📄'}</div>
+            <div class="info">
+                <h3>${b.title}</h3>
+                <p>${b.url}</p>
+            </div>
+            <div class="actions">
+                <a href="${b.url}" class="btn btn-visit">👁️</a>
+                <button class="btn btn-delete" onclick="deleteBookmark(${i})">🗑️</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function deleteBookmark(index) {
+    const bookmarks = JSON.parse(localStorage.getItem('imci-bookmarks') || '[]');
+    bookmarks.splice(index, 1);
+    localStorage.setItem('imci-bookmarks', JSON.stringify(bookmarks));
+    loadBookmarks();
+    showToast('🗑️ تم الحذف');
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+loadBookmarks();
+</script>
+</body>
+</html>
