@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="description" content="منصة IMCI اليمن - التدريب الطبي الاحترافي للرعاية التكاملية لصحة الطفل - وزارة الصحة العامة والبيئة">
     <meta name="keywords" content="IMCI, Yemen, طب الأطفال, الرعاية الصحية, التدريب الطبي, اليمن">
     <meta name="author" content="Dr. Salah Al-Ahdal">
@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════
-           IMCI Yemen Platform v3.0 — Complete & Fixed
+           IMCI Yemen Platform v3.1 — Fixed & Optimized
            Design System: Dark Medical Theme
            Author: Dr. Salah Al-Ahdal
            ═══════════════════════════════════════════ */
@@ -50,6 +50,11 @@
 
             /* Yemen Flag */
             --yemen-red: #CE1126;  --yemen-white: #FFFFFF;  --yemen-black: #000000;
+
+            /* Social Colors */
+            --whatsapp: #25D366;
+            --facebook: #1877F2;
+            --twitter: #1DA1F2;
 
             /* Theme Variables */
             --bg-body:        #0b1120;
@@ -98,7 +103,7 @@
         *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; font-size:var(--font-base); -webkit-font-smoothing:antialiased; }
         body {
-            font-family:'Cairo',sans-serif;
+            font-family:'Cairo', 'Tahoma', 'Arial', sans-serif;
             background:var(--bg-body);
             color:var(--text-primary);
             min-height:100vh;
@@ -107,6 +112,19 @@
             transition:background 0.5s, color 0.5s;
             padding-top:var(--header-height);
             font-size:var(--font-base);
+        }
+
+        /* Screen reader only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         /* Scrollbar */
@@ -162,8 +180,8 @@
         .top-bar {
             position:fixed; top:5px; left:0; right:0; z-index:calc(var(--z-header) - 1);
             background:var(--bg-glass);
-            backdrop-filter:blur(20px) saturate(1.5);
-            -webkit-backdrop-filter:blur(20px) saturate(1.5);
+            backdrop-filter:blur(12px) saturate(1.2);
+            -webkit-backdrop-filter:blur(12px) saturate(1.2);
             border-bottom:1px solid var(--border-color);
             box-shadow:var(--shadow-md);
             transition:box-shadow 0.3s, border-color 0.3s;
@@ -184,12 +202,12 @@
         }
         .header:hover img { transform:scale(1.05) rotate(2deg); }
         .header h1 {
-            font-family:'Amiri',serif; color:var(--text-gold); font-size:1.5rem;
+            font-family:'Amiri', 'Georgia', serif; color:var(--text-gold); font-size:1.5rem;
             font-weight:700; letter-spacing:0.5px;
             text-shadow:0 2px 10px rgba(212,175,55,0.2);
         }
         .header h2 {
-            font-family:'Amiri',serif; color:var(--text-primary); font-size:0.95rem;
+            font-family:'Amiri', 'Georgia', serif; color:var(--text-primary); font-size:0.95rem;
             font-weight:400; margin-top:4px; opacity:0.9;
         }
         .header p {
@@ -227,8 +245,8 @@
         .search-box input {
             width:100%; padding:14px 50px 14px 20px; border-radius:50px;
             border:1px solid var(--border-color); background:var(--bg-card);
-            color:var(--text-primary); font-family:'Cairo',sans-serif; font-size:0.95rem;
-            transition:all 0.3s; backdrop-filter:blur(10px);
+            color:var(--text-primary); font-family:'Cairo', 'Tahoma', sans-serif; font-size:0.95rem;
+            transition:all 0.3s;
         }
         .search-box input:focus {
             outline:none; border-color:var(--teal-400);
@@ -256,7 +274,7 @@
             background:radial-gradient(circle, rgba(20,184,166,0.08) 0%, transparent 70%);
         }
         .hero h2 {
-            font-family:'Amiri',serif; font-size:2.4rem; color:var(--teal-300);
+            font-family:'Amiri', 'Georgia', serif; font-size:2.4rem; color:var(--teal-300);
             font-weight:700; margin-bottom:12px;
             text-shadow:0 0 30px rgba(20,184,166,0.15);
             animation:fadeInUp 0.8s ease-out;
@@ -305,7 +323,7 @@
             background:var(--bg-card); border-radius:var(--radius-lg); padding:32px 24px;
             text-align:center; text-decoration:none; color:var(--text-primary); display:block;
             transition:all var(--transition); border:1px solid var(--border-color);
-            position:relative; overflow:hidden; backdrop-filter:blur(10px);
+            position:relative; overflow:hidden;
         }
         .card::before {
             content:''; position:absolute; top:0; left:0; right:0; height:3px;
@@ -360,7 +378,7 @@
         .stat:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); background:var(--bg-card-hov); }
         .stat-num {
             font-size:2.2rem; font-weight:900; line-height:1; margin-bottom:8px;
-            font-family:'Amiri',serif;
+            font-family:'Amiri', 'Georgia', serif;
             background:linear-gradient(135deg, var(--teal-300), var(--gold-400));
             -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
         }
@@ -374,9 +392,9 @@
         .sidebar a {
             width:46px; height:46px; border-radius:50%; display:flex;
             align-items:center; justify-content:center; text-decoration:none;
-            font-size:20px; background:var(--teal-500); color:#fff;
+            font-size:20px; color:#fff;
             box-shadow:var(--shadow-md); transition:all var(--transition);
-            position:relative; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.1);
+            position:relative; border:1px solid rgba(255,255,255,0.1);
         }
         .sidebar a:hover,.sidebar a:focus { transform:scale(1.15) rotate(5deg); box-shadow:var(--shadow-lg), var(--shadow-glow); outline:none; }
         .sidebar a:focus-visible { outline:3px solid var(--teal-400); outline-offset:2px; }
@@ -458,7 +476,7 @@
             margin-top:50px; position:relative;
         }
         .sig span { color:var(--text-muted); font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; }
-        .sig strong { color:var(--text-gold); font-weight:700; font-size:1rem; margin-top:6px; display:block; font-family:'Amiri',serif; }
+        .sig strong { color:var(--text-gold); font-weight:700; font-size:1rem; margin-top:6px; display:block; font-family:'Amiri', 'Georgia', serif; }
         .sig .role { color:var(--text-muted); font-size:0.7rem; margin-top:8px; display:block; }
 
         /* Animations */
@@ -531,7 +549,7 @@
             background:var(--bg-surface); border:1px solid var(--border-color);
             color:var(--text-secondary); padding:6px 12px; border-radius:var(--radius-sm);
             font-size:0.75rem; cursor:pointer; transition:all 0.3s;
-            display:flex; align-items:center; gap:6px; font-family:'Cairo',sans-serif;
+            display:flex; align-items:center; gap:6px; font-family:'Cairo', 'Tahoma', sans-serif;
         }
         .copy-btn:hover { background:var(--teal-500); color:#fff; border-color:var(--teal-500); }
 
@@ -591,7 +609,7 @@
         }
         .splash.hide { opacity:0; visibility:hidden; }
         .splash img { width:120px; animation:pulse-splash 2s infinite; }
-        .splash h2 { color:#d4af37; font-family:Amiri,serif; margin-top:20px; font-size:1.8rem; }
+        .splash h2 { color:#d4af37; font-family:'Amiri', 'Georgia', serif; margin-top:20px; font-size:1.8rem; }
         .splash p { color:#5eead4; margin-top:10px; }
         .splash .loader { width:60px; height:4px; background:rgba(255,255,255,0.2); border-radius:2px; margin-top:30px; overflow:hidden; }
         .splash .loader div { height:100%; background:#14b8a6; animation:load 1.5s ease-in-out; border-radius:2px; }
@@ -629,7 +647,7 @@
             <img src="images/yemen-eagle.png" alt="شعار وزارة الصحة العامة والبيئة - اليمن" loading="eager">
             <h1>IMCI Yemen</h1>
             <h2>منصة التدريب الطبي للرعاية التكاملية لصحة الطفل</h2>
-            <p>🇾🇪 الجمهورية اليمنية — وزارة الصحة العامة والبيئة</p>
+            <p><span aria-hidden="true">🇾🇪</span> الجمهورية اليمنية — وزارة الصحة العامة والبيئة</p>
         </div>
         <nav class="nav" aria-label="التنقل الرئيسي">
             <a href="#home" class="active" aria-current="page">الرئيسية</a>
@@ -662,19 +680,16 @@
             <h2>مرحباً بك في منصة IMCI</h2>
             <p>منصة احترافية للتدريب على الرعاية التكاملية لصحة الطفل في الجمهورية اليمنية</p>
             <div class="hero-actions">
-                <a href="#modules" class="btn btn-teal">🚀 ابدأ التدريب</a>
-                <a href="#about" class="btn btn-outline">ℹ️ تعرف على المنصة</a>
-                <button class="btn btn-gold" onclick="celebrateCompletion()">🎉 احتفال تجريبي</button>
+                <a href="#modules" class="btn btn-teal"><span aria-hidden="true">🚀</span> ابدأ التدريب</a>
+                <a href="#about" class="btn btn-outline"><span aria-hidden="true">ℹ️</span> تعرف على المنصة</a>
+                <button type="button" class="btn btn-gold" onclick="celebrateCompletion()"><span aria-hidden="true">🎉</span> احتفال تجريبي</button>
             </div>
-        <a href="bookmarks.html" class="card animate-on-scroll"><span class="icon">🔖</span><h3>المفضلة</h3><p>الصفحات المحفوظة</p></a>
-        <a href="notes.html" class="card animate-on-scroll"><span class="icon">📝</span><h3>الملاحظات</h3><p>دفتر ملاحظاتك الشخصي</p></a>
-        <a href="progress.html" class="card animate-on-scroll"><span class="icon">📚</span><h3>تقدم الدروس</h3><p>متابعة إتمام الوحدات</p></a>
         </section>
 
         <!-- Search -->
         <div class="search-box" role="search">
             <input type="search" id="searchInput" placeholder="ابحث في الوحدات التدريبية..." aria-label="البحث في المحتوى">
-            <button type="button" onclick="performSearch()" aria-label="بحث">🔍</button>
+            <button type="button" onclick="performSearch()" aria-label="بحث"><span aria-hidden="true">🔍</span></button>
         </div>
 
         <!-- Stats -->
@@ -695,17 +710,18 @@
                 <div class="stat-num" data-target="98">0</div>
                 <div class="stat-label">% نسبة الإتمام</div>
             </div>
-        <a href="bookmarks.html" class="card animate-on-scroll"><span class="icon">🔖</span><h3>المفضلة</h3><p>الصفحات المحفوظة</p></a>
-        <a href="notes.html" class="card animate-on-scroll"><span class="icon">📝</span><h3>الملاحظات</h3><p>دفتر ملاحظاتك الشخصي</p></a>
-        <a href="progress.html" class="card animate-on-scroll"><span class="icon">📚</span><h3>تقدم الدروس</h3><p>متابعة إتمام الوحدات</p></a>
         </section>
 
         <!-- Training Modules -->
         <section id="modules" aria-label="الوحدات التدريبية">
-            <h2 style="text-align:center; font-family:'Amiri',serif; color:var(--teal-300); margin-bottom:30px; font-size:1.8rem;">الوحدات التدريبية</h2>
+            <h2 style="text-align:center; font-family:'Amiri', 'Georgia', serif; color:var(--teal-300); margin-bottom:30px; font-size:1.8rem;">الوحدات التدريبية</h2>
             <div class="grid" id="modulesGrid">
-                <a href="age-calculator.html" class="card animate-on-scroll"><span class="icon">🧮</span><h3>حاسبة العمر</h3><p>حساب عمر الطفل بالأشهر والأيام</p></a>
-            <a href="#" class="card animate-on-scroll" data-module="1">
+                <a href="age-calculator.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">🧮</span>
+                    <h3>حاسبة العمر</h3>
+                    <p>حساب عمر الطفل بالأشهر والأيام</p>
+                </a>
+                <a href="module-under2.html" class="card animate-on-scroll" data-module="1">
                     <span class="completed-badge">✓ تمت</span>
                     <div class="card-progress">
                         <svg viewBox="0 0 36 36">
@@ -713,11 +729,11 @@
                             <circle class="fill" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="0"></circle>
                         </svg>
                     </div>
-                    <span class="icon">👶</span>
+                    <span class="icon" aria-hidden="true">👶</span>
                     <h3>تقييم الطفل أقل من شهرين</h3>
                     <p>تقييم المخاطر، الرضاعة، الوزن، والإحالة للمستشفى</p>
                 </a>
-                <a href="#" class="card animate-on-scroll completed" data-module="2">
+                <a href="module-2to5.html" class="card animate-on-scroll completed" data-module="2">
                     <span class="completed-badge">✓ تمت</span>
                     <div class="card-progress">
                         <svg viewBox="0 0 36 36">
@@ -725,12 +741,16 @@
                             <circle class="fill" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="0"></circle>
                         </svg>
                     </div>
-                    <span class="icon">🧒</span>
+                    <span class="icon" aria-hidden="true">🧒</span>
                     <h3>الطفل من شهرين إلى 5 سنوات</h3>
                     <p>تقييم الأعراض العامة، سوء التغذية، فقر الدم، وفحص HIV</p>
                 </a>
-                <a href="protocol.html" class="card animate-on-scroll"><span class="icon">📋</span><h3>بروتوكولات العلاج</h3><p>6 بروتوكولات IMCI كاملة</p></a>
-            <a href="#" class="card animate-on-scroll" data-module="3">
+                <a href="protocol.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">📋</span>
+                    <h3>بروتوكولات العلاج</h3>
+                    <p>6 بروتوكولات IMCI كاملة</p>
+                </a>
+                <a href="module-cough.html" class="card animate-on-scroll" data-module="3">
                     <span class="completed-badge">✓ تمت</span>
                     <div class="card-progress">
                         <svg viewBox="0 0 36 36">
@@ -738,12 +758,16 @@
                             <circle class="fill" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="44"></circle>
                         </svg>
                     </div>
-                    <span class="icon">🤒</span>
+                    <span class="icon" aria-hidden="true">🤒</span>
                     <h3>السعال أو صعوبة التنفس</h3>
                     <p>تقييم الالتهاب الرئوي، الربو، والإحالة العاجلة</p>
                 </a>
-                <a href="live-room.html" class="card animate-on-scroll"><span class="icon">📹</span><h3>البث المباشر</h3><p>محاضرات تفاعلية مع المدربين</p></a>
-            <a href="#" class="card animate-on-scroll" data-module="4">
+                <a href="live-room.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">📹</span>
+                    <h3>البث المباشر</h3>
+                    <p>محاضرات تفاعلية مع المدربين</p>
+                </a>
+                <a href="module-diarrhea.html" class="card animate-on-scroll" data-module="4">
                     <span class="completed-badge">✓ تمت</span>
                     <div class="card-progress">
                         <svg viewBox="0 0 36 36">
@@ -751,12 +775,16 @@
                             <circle class="fill" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="66"></circle>
                         </svg>
                     </div>
-                    <span class="icon">💩</span>
+                    <span class="icon" aria-hidden="true">💩</span>
                     <h3>الإسهال</h3>
                     <p>تقييم الجفاف، الإسهال الدموي، والعلاج بالزنك</p>
                 </a>
-                <a href="report.html" class="card animate-on-scroll"><span class="icon">📊</span><h3>تقرير الأداء</h3><p>تتبع التقدم والشهادات</p></a>
-            <a href="#" class="card animate-on-scroll" data-module="5">
+                <a href="report.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">📊</span>
+                    <h3>تقرير الأداء</h3>
+                    <p>تتبع التقدم والشهادات</p>
+                </a>
+                <a href="module-fever.html" class="card animate-on-scroll" data-module="5">
                     <span class="completed-badge">✓ تمت</span>
                     <div class="card-progress">
                         <svg viewBox="0 0 36 36">
@@ -764,12 +792,16 @@
                             <circle class="fill" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="88"></circle>
                         </svg>
                     </div>
-                    <span class="icon">🤒</span>
+                    <span class="icon" aria-hidden="true">🤒</span>
                     <h3>الحمى</h3>
                     <p>تقييم الملاريا، الحمى الروماتيزمية، والحمى المستعصية</p>
                 </a>
-                <a href="quiz.html" class="card animate-on-scroll"><span class="icon">✅</span><h3>اختبارات تقييمية</h3><p>تقييم المعرفة والمهارات</p></a>
-            <a href="#" class="card animate-on-scroll" data-module="6">
+                <a href="quiz.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">✅</span>
+                    <h3>اختبارات تقييمية</h3>
+                    <p>تقييم المعرفة والمهارات</p>
+                </a>
+                <a href="module-ear.html" class="card animate-on-scroll" data-module="6">
                     <span class="completed-badge">✓ تمت</span>
                     <div class="card-progress">
                         <svg viewBox="0 0 36 36">
@@ -777,50 +809,59 @@
                             <circle class="fill" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="88"></circle>
                         </svg>
                     </div>
-                    <span class="icon">🧠</span>
+                    <span class="icon" aria-hidden="true">🧠</span>
                     <h3>مشاكل الأذن</h3>
-                    <p>تقييم التهاب الأذن الوسطى والمastoid</p>
+                    <p>تقييم التهاب الأذن الوسطى والماستويد</p>
+                </a>
+                <a href="bookmarks.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">🔖</span>
+                    <h3>المفضلة</h3>
+                    <p>الصفحات المحفوظة</p>
+                </a>
+                <a href="notes.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">📝</span>
+                    <h3>الملاحظات</h3>
+                    <p>دفتر ملاحظاتك الشخصي</p>
+                </a>
+                <a href="progress.html" class="card animate-on-scroll">
+                    <span class="icon" aria-hidden="true">📚</span>
+                    <h3>تقدم الدروس</h3>
+                    <p>متابعة إتمام الوحدات</p>
                 </a>
             </div>
-        <a href="bookmarks.html" class="card animate-on-scroll"><span class="icon">🔖</span><h3>المفضلة</h3><p>الصفحات المحفوظة</p></a>
-        <a href="notes.html" class="card animate-on-scroll"><span class="icon">📝</span><h3>الملاحظات</h3><p>دفتر ملاحظاتك الشخصي</p></a>
-        <a href="progress.html" class="card animate-on-scroll"><span class="icon">📚</span><h3>تقدم الدروس</h3><p>متابعة إتمام الوحدات</p></a>
         </section>
 
         <!-- About Section -->
         <section id="about" style="margin-top:60px; padding:40px 20px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-color);" class="animate-on-scroll">
-            <h2 style="text-align:center; font-family:'Amiri',serif; color:var(--gold-400); margin-bottom:20px; font-size:1.6rem;">عن المنصة</h2>
+            <h2 style="text-align:center; font-family:'Amiri', 'Georgia', serif; color:var(--gold-400); margin-bottom:20px; font-size:1.6rem;">عن المنصة</h2>
             <p style="text-align:center; color:var(--text-secondary); max-width:700px; margin:0 auto; line-height:1.8;">
                 منصة IMCI Yemen هي مبادرة وطنية تهدف إلى تدريب الكوادر الطبية في الجمهورية اليمنية على برنامج الرعاية التكاملية لصحة الطفل (IMCI) المعتمد من منظمة الصحة العالمية. تشرف على المنصة <strong style="color:var(--teal-300);">الدكتور صلاح الأهدل</strong> وتعمل تحت إشراف وزارة الصحة العامة والبيئة.
             </p>
             <div style="text-align:center; margin-top:24px;">
-                <button class="btn btn-outline" onclick="copyToClipboard('منصة IMCI Yemen - التدريب الطبي للرعاية التكاملية لصحة الطفل')">📋 نسخ الوصف</button>
-                <button class="btn btn-teal" onclick="speakText('منصة IMCI Yemen هي مبادرة وطنية لتدريب الكوادر الطبية على الرعاية التكاملية لصحة الطفل')">🔊 استمع</button>
+                <button type="button" class="btn btn-outline" onclick="copyToClipboard('منصة IMCI Yemen - التدريب الطبي للرعاية التكاملية لصحة الطفل')"><span aria-hidden="true">📋</span> نسخ الوصف</button>
+                <button type="button" class="btn btn-teal" onclick="speakText('منصة IMCI Yemen هي مبادرة وطنية لتدريب الكوادر الطبية على الرعاية التكاملية لصحة الطفل')"><span aria-hidden="true">🔊</span> استمع</button>
             </div>
-        <a href="bookmarks.html" class="card animate-on-scroll"><span class="icon">🔖</span><h3>المفضلة</h3><p>الصفحات المحفوظة</p></a>
-        <a href="notes.html" class="card animate-on-scroll"><span class="icon">📝</span><h3>الملاحظات</h3><p>دفتر ملاحظاتك الشخصي</p></a>
-        <a href="progress.html" class="card animate-on-scroll"><span class="icon">📚</span><h3>تقدم الدروس</h3><p>متابعة إتمام الوحدات</p></a>
         </section>
     </main>
 
     <!-- Sidebar -->
     <aside class="sidebar" aria-label="أدوات سريعة">
-        <a href="https://wa.me/?text=منصة IMCI Yemen - منصة تدريبية رائعة للرعاية التكاملية لصحة الطفل" target="_blank" rel="noopener" title="مشاركة واتساب" style="background:#25D366;">📱</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" title="مشاركة فيسبوك" style="background:#1877F2;">📘</a>
-        <a href="https://twitter.com/intent/tweet?text=منصة IMCI Yemen" target="_blank" rel="noopener" title="مشاركة تويتر" style="background:#1DA1F2;">🐦</a>
-        <a href="#" class="gold" onclick="toggleFocusMode()" title="وضع التركيز">🎯</a>
+        <a href="https://wa.me/?text=منصة IMCI Yemen - منصة تدريبية رائعة للرعاية التكاملية لصحة الطفل" target="_blank" rel="noopener" title="مشاركة واتساب" style="background:var(--whatsapp);"><span aria-hidden="true">📱</span><span class="sr-only">مشاركة واتساب</span></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" title="مشاركة فيسبوك" style="background:var(--facebook);"><span aria-hidden="true">📘</span><span class="sr-only">مشاركة فيسبوك</span></a>
+        <a href="https://twitter.com/intent/tweet?text=منصة IMCI Yemen" target="_blank" rel="noopener" title="مشاركة تويتر" style="background:var(--twitter);"><span aria-hidden="true">🐦</span><span class="sr-only">مشاركة تويتر</span></a>
+        <a href="#" class="gold" onclick="event.preventDefault(); toggleFocusMode();" title="وضع التركيز" role="button"><span aria-hidden="true">🎯</span><span class="sr-only">وضع التركيز</span></a>
     </aside>
 
     <!-- Controls -->
     <div class="ctrl" aria-label="أدوات التحكم">
-        <button type="button" class="ctrl-dark" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي/النهاري">🌙</button>
-        <button type="button" class="ctrl-font-up" onclick="changeFontSize(1)" aria-label="تكبير الخط">+</button>
-        <button type="button" class="ctrl-font-down" onclick="changeFontSize(-1)" aria-label="تصغير الخط">−</button>
-        <button type="button" class="ctrl-tts" onclick="toggleTTS()" aria-label="قراءة النصوص صوتياً">🔊</button>
+        <button type="button" class="ctrl-dark" onclick="toggleDarkMode()" aria-label="تبديل الوضع الليلي/النهاري"><span aria-hidden="true">🌙</span></button>
+        <button type="button" class="ctrl-font-up" onclick="changeFontSize(1)" aria-label="تكبير الخط"><span aria-hidden="true">+</span></button>
+        <button type="button" class="ctrl-font-down" onclick="changeFontSize(-1)" aria-label="تصغير الخط"><span aria-hidden="true">−</span></button>
+        <button type="button" class="ctrl-tts" onclick="toggleTTS()" aria-label="قراءة النصوص صوتياً"><span aria-hidden="true">🔊</span></button>
     </div>
 
     <!-- Back to Top -->
-    <button type="button" class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="العودة إلى الأعلى">↑</button>
+    <button type="button" class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="العودة إلى الأعلى"><span aria-hidden="true">↑</span></button>
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
@@ -840,7 +881,7 @@
 
     <script>
         // ═══════════════════════════════════════════
-        // IMCI Yemen Platform v3.0 — JavaScript
+        // IMCI Yemen Platform v3.1 — Fixed & Optimized
         // ═══════════════════════════════════════════
 
         // ─── State Management ───
@@ -872,7 +913,7 @@
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
+            const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             
             scrollProgress.style.width = scrollPercent + '%';
             
@@ -959,7 +1000,12 @@
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.className = 'toast ' + type;
-            toast.textContent = message;
+            
+            // Create text node instead of innerHTML for security
+            const textSpan = document.createElement('span');
+            textSpan.textContent = message;
+            toast.appendChild(textSpan);
+            
             container.appendChild(toast);
             container.classList.add('show');
             
@@ -975,7 +1021,7 @@
 
         // ─── Search ───
         function performSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
             if (!query) return;
             
             const cards = document.querySelectorAll('.card');
@@ -1003,17 +1049,13 @@
         function copyToClipboard(text) {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showToast('✓ تم النسخ إلى الحافظة', 'success');
+                    showToast('تم النسخ إلى الحافظة', 'success');
                     logActivity('copy', 'نسخ: ' + text.substring(0, 30));
+                }).catch(() => {
+                    showToast('فشل النسخ، يرجى المحاولة مرة أخرى', 'error');
                 });
             } else {
-                const ta = document.createElement('textarea');
-                ta.value = text;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                showToast('✓ تم النسخ إلى الحافظة', 'success');
+                showToast('المتصفح لا يدعم النسخ التلقائي', 'error');
             }
         }
 
@@ -1053,7 +1095,7 @@
                 container.appendChild(confetti);
             }
             
-            showToast('🎉 مبروك! تم إكمال الوحدة بنجاح', 'success');
+            showToast('مبروك! تم إكمال الوحدة بنجاح', 'success');
             logActivity('celebration', 'احتفال إتمام');
             
             setTimeout(() => {
@@ -1125,10 +1167,28 @@
         
         sections.forEach(section => sectionObserver.observe(section));
 
-        // ─── Breadcrumb Update ───
+        // ─── Breadcrumb Update (Safe DOM manipulation) ───
         function updateBreadcrumb(sectionName) {
             const bc = document.getElementById('breadcrumb');
-            bc.innerHTML = '<a href="#home">الرئيسية</a><span class="sep">›</span><span class="current">' + sectionName + '</span>';
+            // Clear existing content safely
+            while (bc.firstChild) {
+                bc.removeChild(bc.firstChild);
+            }
+            
+            const homeLink = document.createElement('a');
+            homeLink.href = '#home';
+            homeLink.textContent = 'الرئيسية';
+            bc.appendChild(homeLink);
+            
+            const sep = document.createElement('span');
+            sep.className = 'sep';
+            sep.textContent = '›';
+            bc.appendChild(sep);
+            
+            const current = document.createElement('span');
+            current.className = 'current';
+            current.textContent = sectionName;
+            bc.appendChild(current);
         }
 
         // ─── Service Worker Registration (Offline Support) ───
@@ -1159,9 +1219,19 @@
         }
 
         // ─── Online/Offline Status ───
-        window.addEventListener("online",()=>{document.getElementById("connDot").style.background="#4ade80";document.getElementById("connText").textContent="متصل";document.getElementById("connStatus").style.borderColor="#4ade80";});window.addEventListener("offline",()=>{document.getElementById("connDot").style.background="#ef4444";document.getElementById("connText").textContent="غير متصل";document.getElementById("connStatus").style.borderColor="#ef4444";});
-window.addEventListener(online', () => showToast('✓ تم استعادة الاتصال بالإنترنت', 'success'));
-        window.addEventListener('offline', () => showToast('⚠️ أنت في وضع عدم الاتصال', 'error'));
+        window.addEventListener('online', () => {
+            document.getElementById('connDot').style.background = '#4ade80';
+            document.getElementById('connText').textContent = 'متصل';
+            document.getElementById('connStatus').style.borderColor = '#4ade80';
+            showToast('تم استعادة الاتصال بالإنترنت', 'success');
+        });
+
+        window.addEventListener('offline', () => {
+            document.getElementById('connDot').style.background = '#ef4444';
+            document.getElementById('connText').textContent = 'غير متصل';
+            document.getElementById('connStatus').style.borderColor = '#ef4444';
+            showToast('أنت في وضع عدم الاتصال', 'error');
+        });
 
         // ─── Initialize ───
         document.addEventListener('DOMContentLoaded', () => {
@@ -1189,5 +1259,4 @@ window.addEventListener(online', () => showToast('✓ تم استعادة الا
         });
     </script>
 </body>
-</html>
-
+    </html>
