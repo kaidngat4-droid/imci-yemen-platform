@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم الطفل أقل من شهرين - IMCI Yemen</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--p:#14b8a6;--g:#d4af37;--d:#0b1120;--l:#cbd5e1;--r:#CE1126;--w:#f59e0b}
+        body{font-family:'Cairo',sans-serif;background:var(--d);color:#fff;min-height:100vh;padding:20px;line-height:1.8}
+        .container{max-width:900px;margin:auto}
+        .header{text-align:center;padding:30px 20px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:20px;margin-bottom:30px;border:1px solid rgba(212,175,55,0.2)}
+        .header h1{font-family:'Amiri',serif;color:var(--g);font-size:1.8rem}
+        .header p{color:var(--p);margin-top:10px}
+        .section{background:rgba(255,255,255,0.04);border-radius:16px;padding:25px;margin:20px 0;border-right:4px solid var(--p)}
+        .section.danger{border-right-color:var(--r)}
+        .section.treatment{border-right-color:var(--p)}
+        .section h2{color:var(--g);font-family:'Amiri',serif;margin-bottom:15px;display:flex;align-items:center;gap:10px}
+        .section h3{color:#5eead4;margin:15px 0 10px}
+        .section ul{padding-right:20px}
+        .section li{margin:10px 0;color:var(--l)}
+        .checklist{list-style:none;padding:0}
+        .checklist li{padding:12px 15px;margin:8px 0;background:rgba(255,255,255,0.03);border-radius:10px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:0.3s;border:1px solid rgba(255,255,255,0.05)}
+        .checklist li:hover{background:rgba(255,255,255,0.06)}
+        .checklist li.checked{background:rgba(20,184,166,0.15);border-color:var(--p)}
+        .checklist li.checked .check{background:var(--p);border-color:var(--p)}
+        .check{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;transition:0.3s;flex-shrink:0}
+        .check.checked{background:var(--p);border-color:var(--p)}
+        .alert{background:rgba(206,17,38,0.15);border:1px solid var(--r);padding:20px;border-radius:12px;margin:15px 0;text-align:center}
+        .alert h3{color:var(--r);margin-bottom:10px}
+        .btn{display:inline-block;padding:12px 25px;border-radius:30px;text-decoration:none;font-weight:700;margin:10px 5px;transition:0.3s;border:none;cursor:pointer;font-family:'Cairo',sans-serif}
+        .btn-back{background:var(--p);color:#fff}
+        .btn-print{background:var(--g);color:#1a1a1a}
+        .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin:5px}
+        .badge-danger{background:rgba(206,17,38,0.2);color:var(--r)}
+        .badge-success{background:rgba(20,184,166,0.2);color:var(--p)}
+        .sig{background:rgba(13,43,30,0.5);padding:16px;text-align:center;border-top:1px solid rgba(212,175,55,0.2);margin-top:30px;border-radius:12px}
+        .sig span{color:#888;font-size:0.7rem}
+        .sig strong{color:var(--g)}
+        @media(max-width:600px){.section{padding:15px}.header h1{font-size:1.3rem}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>👶 تقييم الطفل أقل من شهرين</h1>
+        <p>بروتوكول IMCI - منظمة الصحة العالمية (WHO)</p>
+        <span class="badge badge-danger">⚠️ الفئة العمرية: 0-59 يوم</span>
+    </div>
+
+    <!-- الخطوة 1: علامات الخطر -->
+    <div class="section danger">
+        <h2>🚨 الخطوة 1: علامات الخطر العامة</h2>
+        <p style="color:var(--l);margin-bottom:15px;">تحقق من وجود أي من العلامات التالية (إذا وجدت ← احال فوراً):</p>
+        <ul class="checklist" id="dangerSigns">
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked');checkReferral()">
+                <span class="check">✓</span>
+                <span>عدم القدرة على الرضاعة أو الشرب</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked');checkReferral()">
+                <span class="check">✓</span>
+                <span>نوبات صرع / اختلاجات</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked');checkReferral()">
+                <span class="check">✓</span>
+                <span>غيبوبة أو فقدان الوعي / خمول شديد</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked');checkReferral()">
+                <span class="check">✓</span>
+                <span>استفراغ كل شيء (Everything)</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked');checkReferral()">
+                <span class="check">✓</span>
+                <span>صعوبة شديدة في التنفس / زرقة</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked');checkReferral()">
+                <span class="check">✓</span>
+                <span>حمى شديدة (> 38°C) أو انخفاض حرارة (< 35.5°C)</span>
+            </li>
+        </ul>
+        <div class="alert" id="referralAlert" style="display:none">
+            <h3>🏥 احال فوراً للمستشفى!</h3>
+            <p>وجود أي علامة خطر عامة يستوجب الإحالة الطارئة</p>
+            <p style="margin-top:10px"><strong>أثناء الإحالة:</strong> أعطِ المضاد الحيوي + حافظ على دفء الطفل</p>
+        </div>
+    </div>
+
+    <!-- الخطوة 2: العدوى البكتيرية -->
+    <div class="section">
+        <h2>🦠 الخطوة 2: تقييم العدوى البكتيرية الخطيرة</h2>
+        <ul class="checklist">
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>احمرار أو خروج صديد من السرة</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>احمرار الجلد مع بثور أو خروج صديد (عدوى جلدية)</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>درجة حرارة ≥ 37.5°C (إبطي) أو ≥ 38°C (شرجي)</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>انخفاض حرارة < 35.5°C</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>حركات أقل من الطبيعي أو تهيج غير طبيعي</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- الخطوة 3: الإسهال -->
+    <div class="section">
+        <h2>💧 الخطوة 3: تقييم الإسهال والجفاف</h2>
+        <h3>علامات الجفاف:</h3>
+        <ul class="checklist">
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>جلد بطيء العودة (> 2 ثانية) - علامة جفاف شديد</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>عيون غائرة</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>جفاف الفم واللسان</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>نقص عدد مرات التبول (أقل من 4 مرات/يوم)</span>
+            </li>
+        </ul>
+        <div class="section treatment">
+            <h3>💊 خطة العلاج:</h3>
+            <p><strong>الجفاف الشديد:</strong> احال فوراً + ORS أثناء الإحالة</p>
+            <p><strong>جفاف بعض:</strong> ORS 75ml/kg خلال 4 ساعات + متابعة الرضاعة</p>
+            <p><strong>لا جفاف:</strong> ORS 50ml بعد كل برازة + استمرار الرضاعة الطبيعية</p>
+        </div>
+    </div>
+
+    <!-- الخطوة 4: التغذية -->
+    <div class="section">
+        <h2>🍼 الخطوة 4: تقييم التغذية والرضاعة</h2>
+        <ul class="checklist">
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>هل يرضع الطفل رضاعة طبيعية حصرية؟</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>عدد مرات الرضاعة: 8-12 مرة/يوم</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>وضعية الرضاعة صحيحة (الطفل ملتصق جيداً بالثدي)</span>
+            </li>
+            <li onclick="this.classList.toggle('checked');this.querySelector('.check').classList.toggle('checked')">
+                <span class="check">✓</span>
+                <span>وزن الطفل يزداد بشكل طبيعي (20-30g/يوم)</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- الخطوة 5: التحصين -->
+    <div class="section">
+        <h2>💉 الخطوة 5: التحصينات</h2>
+        <table style="width:100%;border-collapse:collapse;margin:15px 0">
+            <tr style="background:rgba(255,255,255,0.05)">
+                <th style="padding:12px;text-align:right;color:var(--g)">اللقاح</th>
+                <th style="padding:12px;text-align:right;color:var(--g)">الموعد</th>
+            </tr>
+            <tr><td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05)">BCG (الدرن)</td><td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05)">عند الولادة</td></tr>
+            <tr><td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05)">شلل الأطفال (OPV0)</td><td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05)">عند الولادة</td></tr>
+            <tr><td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05)">التهاب الكبد B</td><td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05)">عند الولادة</td></tr>
+        </table>
+    </div>
+
+    <!-- أزرار -->
+    <div style="text-align:center;margin:30px 0">
+        <a href="https://kaidngat4-droid.github.io/imci-yemen-platform/" class="btn btn-back">🏠 الرئيسية</a>
+        <button class="btn btn-print" onclick="window.print()">🖨️ طباعة التقييم</button>
+    </div>
+
+    <div class="sig">
+        <span>🌐 Engineered & Designed by</span><br>
+        <strong>Dr. Salah Al-Ahdal</strong><br>
+        <span style="color:#7cb342;font-size:0.65rem">Full-Stack Developer & Medical Systems Architect</span>
+    </div>
+</div>
+
+<script>
+function checkReferral(){
+    const checked=document.querySelectorAll('#dangerSigns li.checked').length;
+    document.getElementById('referralAlert').style.display=checked>0?'block':'none';
+}
+</script>
+</body>
+</html>
