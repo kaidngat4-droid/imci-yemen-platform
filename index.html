@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════
-           IMCI Yemen Platform v2.0 — Single File
+           IMCI Yemen Platform v2.1 — Fixed Header
            Design System: Dark Medical Theme
            Author: Dr. Salah Al-Ahdal
            ═══════════════════════════════════════════ */
@@ -44,7 +44,7 @@
             --bg-body:        #0b1120;
             --bg-surface:     rgba(255,255,255,0.04);
             --bg-surface-hov: rgba(255,255,255,0.08);
-            --bg-glass:       rgba(15,23,42,0.75);
+            --bg-glass:       rgba(15,23,42,0.85);
             --bg-card:        rgba(255,255,255,0.03);
             --bg-card-hov:    rgba(255,255,255,0.06);
             --text-primary:   #f8fafc;
@@ -61,6 +61,7 @@
             --radius-lg:      20px;
             --radius-xl:      30px;
             --transition:     0.3s cubic-bezier(0.4,0,0.2,1);
+            --header-height:  200px;
         }
 
         /* Light Mode Override */
@@ -68,7 +69,7 @@
             --bg-body:        #f8fafc;
             --bg-surface:     rgba(15,23,42,0.03);
             --bg-surface-hov: rgba(15,23,42,0.06);
-            --bg-glass:       rgba(255,255,255,0.85);
+            --bg-glass:       rgba(255,255,255,0.9);
             --bg-card:        rgba(255,255,255,0.7);
             --bg-card-hov:    rgba(255,255,255,0.9);
             --text-primary:   #0f172a;
@@ -92,7 +93,7 @@
             line-height:1.6;
             overflow-x:hidden;
             transition:background 0.5s, color 0.5s;
-            padding-top:200px;
+            padding-top:var(--header-height);
         }
 
         /* Scrollbar */
@@ -110,13 +111,17 @@
         }
         .skip-link:focus { top:20px; outline:3px solid var(--teal-400); outline-offset:3px; }
 
-        /* Flag Strip */
-        .flag { display:flex; height:5px; position:fixed; top:0; left:0; right:0; z-index:10001; }
+        /* ═══ FIXED HEADER SYSTEM ═══ */
+        /* Flag Strip — Fixed at very top */
+        .flag {
+            display:flex; height:5px;
+            position:fixed; top:0; left:0; right:0; z-index:10001;
+        }
         .flag-r { flex:1; background:var(--yemen-red); }
         .flag-w { flex:1; background:var(--yemen-white); }
         .flag-b { flex:1; background:var(--yemen-black); }
 
-        /* Top Bar */
+        /* Top Bar — Fixed below flag, contains header + nav */
         .top-bar {
             position:fixed; top:5px; left:0; right:0; z-index:10000;
             background:var(--bg-glass);
@@ -125,11 +130,17 @@
             border-bottom:1px solid var(--border-color);
             box-shadow:var(--shadow-md);
             transition:box-shadow 0.3s, border-color 0.3s;
+            will-change:transform;
         }
-        .top-bar.scrolled { box-shadow:0 8px 32px rgba(0,0,0,0.5); border-bottom-color:rgba(212,175,55,0.25); }
+        .top-bar.scrolled {
+            box-shadow:0 8px 32px rgba(0,0,0,0.6);
+            border-bottom-color:rgba(212,175,55,0.3);
+        }
 
-        /* Header */
-        .header { text-align:center; padding:20px 16px 16px; }
+        /* Header — Fixed inside top-bar */
+        .header {
+            text-align:center; padding:20px 16px 16px;
+        }
         .header img {
             width:85px; height:85px; object-fit:contain; margin-bottom:10px;
             filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));
@@ -141,7 +152,10 @@
             font-weight:700; letter-spacing:0.5px;
             text-shadow:0 2px 10px rgba(212,175,55,0.2);
         }
-        .header h2 { font-family:'Amiri',serif; color:var(--text-primary); font-size:0.95rem; font-weight:400; margin-top:4px; opacity:0.9; }
+        .header h2 {
+            font-family:'Amiri',serif; color:var(--text-primary); font-size:0.95rem;
+            font-weight:400; margin-top:4px; opacity:0.9;
+        }
         .header p {
             color:var(--teal-300); margin-top:8px; font-size:0.85rem; font-weight:500;
             display:inline-flex; align-items:center; gap:6px;
@@ -149,7 +163,7 @@
             border:1px solid var(--border-color);
         }
 
-        /* Navigation */
+        /* Navigation — Fixed inside top-bar */
         .nav {
             display:flex; gap:6px; justify-content:center; padding:10px 16px 14px;
             background:var(--bg-surface); flex-wrap:wrap;
@@ -169,10 +183,12 @@
         .nav a:focus-visible { outline:2px solid var(--teal-400); outline-offset:2px; }
         .nav a.active { background:rgba(212,175,55,0.15); border-color:var(--gold-400); color:var(--gold-300); }
 
-        /* Container */
-        .container { max-width:1000px; margin:auto; padding:20px; }
+        /* ═══ SCROLLING CONTENT ═══ */
+        .container {
+            max-width:1000px; margin:auto; padding:20px;
+            position:relative; z-index:1;
+        }
 
-        /* Hero */
         .hero { text-align:center; padding:40px 20px 50px; position:relative; }
         .hero::before {
             content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
@@ -353,9 +369,10 @@
         }
         .toast.show { opacity:1; transform:translate(-50%,-50%) scale(1); }
 
-        /* Responsive */
+        /* ═══ RESPONSIVE ═══ */
         @media(max-width:768px) {
-            body { padding-top:170px; }
+            :root { --header-height: 170px; }
+            body { padding-top:var(--header-height); }
             .header img { width:60px !important; height:60px !important; }
             .header h1 { font-size:1.15rem; }
             .header h2 { font-size:0.8rem; }
@@ -390,7 +407,7 @@
             *,*::before,*::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
             html { scroll-behavior:auto; }
         }
-    </style>
+</style>
 </head>
 <body>
 
@@ -411,12 +428,12 @@
             <p><span aria-hidden="true">🏥</span> منصة التدريب الطبي للرعاية التكاملية لصحة الطفل (IMCI)</p>
         </div>
         <nav class="nav" role="navigation" aria-label="التنقل الرئيسي">
-            <a href="/" class="nav-link active" aria-current="page">🏠 الرئيسية</a>
-            <a href="/report.html" class="nav-link">📊 تقرير</a>
-            <a href="/live-room.html" class="nav-link">📹 بث</a>
-            <a href="/protocol.html" class="nav-link">📋 بروتوكولات</a>
-            <a href="/decision-tree.html" class="nav-link">🌳 تقييم</a>
-            <a href="/age-calculator.html" class="nav-link">🧮 عمر</a>
+            <a href="index.html" class="nav-link active" aria-current="page">🏠 الرئيسية</a>
+            <a href="report.html" class="nav-link">📊 تقرير</a>
+            <a href="live-room.html" class="nav-link">📹 بث</a>
+            <a href="protocol.html" class="nav-link">📋 بروتوكولات</a>
+            <a href="decision-tree.html" class="nav-link">🌳 تقييم</a>
+            <a href="age-calculator.html" class="nav-link">🧮 عمر</a>
         </nav>
     </header>
 
@@ -426,39 +443,39 @@
             <h2 id="hero-title">🏥 IMCI Yemen</h2>
             <p>منصة التدريب الطبي للرعاية التكاملية لصحة الطفل</p>
             <div class="hero-actions">
-                <a href="/trainer.html" class="btn btn-teal"><span>👨‍⚕️</span><span>لوحة المدرب</span></a>
-                <a href="/report.html" class="btn btn-outline"><span>📊</span><span>تقرير الأداء</span></a>
-                <a href="/live-room.html" class="btn btn-gold"><span>📹</span><span>البث المباشر</span></a>
+                <a href="trainer.html" class="btn btn-teal"><span>👨‍⚕️</span><span>لوحة المدرب</span></a>
+                <a href="report.html" class="btn btn-outline"><span>📊</span><span>تقرير الأداء</span></a>
+                <a href="live-room.html" class="btn btn-gold"><span>📹</span><span>البث المباشر</span></a>
             </div>
         </section>
 
         <section class="grid" aria-label="الميزات الرئيسية">
-            <a href="/age-calculator.html" class="card animate-on-scroll" aria-label="حاسبة العمر - حساب عمر الطفل بالأشهر والأيام">
+            <a href="age-calculator.html" class="card animate-on-scroll" aria-label="حاسبة العمر - حساب عمر الطفل بالأشهر والأيام">
                 <span class="icon" aria-hidden="true">🧮</span>
                 <h3>حاسبة العمر</h3>
                 <p>حساب عمر الطفل بالأشهر والأيام</p>
             </a>
-            <a href="/decision-tree.html" class="card animate-on-scroll" aria-label="شجرة القرارات - بروتوكول التقييم التفاعلي">
+            <a href="decision-tree.html" class="card animate-on-scroll" aria-label="شجرة القرارات - بروتوكول التقييم التفاعلي">
                 <span class="icon" aria-hidden="true">🌳</span>
                 <h3>شجرة القرارات</h3>
                 <p>بروتوكول التقييم التفاعلي</p>
             </a>
-            <a href="/protocol.html" class="card animate-on-scroll" aria-label="بروتوكولات العلاج - 6 بروتوكولات IMCI كاملة">
+            <a href="protocol.html" class="card animate-on-scroll" aria-label="بروتوكولات العلاج - 6 بروتوكولات IMCI كاملة">
                 <span class="icon" aria-hidden="true">📋</span>
                 <h3>بروتوكولات العلاج</h3>
                 <p>6 بروتوكولات IMCI كاملة</p>
             </a>
-            <a href="/live-room.html" class="card animate-on-scroll" aria-label="البث المباشر - محاضرات تفاعلية">
+            <a href="live-room.html" class="card animate-on-scroll" aria-label="البث المباشر - محاضرات تفاعلية">
                 <span class="icon" aria-hidden="true">📹</span>
                 <h3>البث المباشر</h3>
                 <p>محاضرات تفاعلية</p>
             </a>
-            <a href="/report.html" class="card animate-on-scroll" aria-label="تقرير الأداء - تتبع التقدم والشهادات">
+            <a href="report.html" class="card animate-on-scroll" aria-label="تقرير الأداء - تتبع التقدم والشهادات">
                 <span class="icon" aria-hidden="true">📊</span>
                 <h3>تقرير الأداء</h3>
                 <p>تتبع التقدم والشهادات</p>
             </a>
-            <a href="/quiz.html" class="card animate-on-scroll" aria-label="اختبارات تقييمية - تقييم المعرفة والمهارات">
+            <a href="quiz.html" class="card animate-on-scroll" aria-label="اختبارات تقييمية - تقييم المعرفة والمهارات">
                 <span class="icon" aria-hidden="true">✅</span>
                 <h3>اختبارات تقييمية</h3>
                 <p>تقييم المعرفة والمهارات</p>
@@ -487,11 +504,11 @@
 
     <!-- Sidebar -->
     <nav class="sidebar" aria-label="روابط سريعة">
-        <a href="/" title="الرئيسية">🏠</a>
-        <a href="/age-calculator.html" title="حاسبة العمر">🧮</a>
-        <a href="/decision-tree.html" title="شجرة القرارات">🌳</a>
-        <a href="/protocol.html" title="البروتوكولات">📋</a>
-        <a href="/quiz.html" title="اختبارات" class="gold">✅</a>
+        <a href="index.html" title="الرئيسية">🏠</a>
+        <a href="age-calculator.html" title="حاسبة العمر">🧮</a>
+        <a href="decision-tree.html" title="شجرة القرارات">🌳</a>
+        <a href="protocol.html" title="البروتوكولات">📋</a>
+        <a href="quiz.html" title="اختبارات" class="gold">✅</a>
     </nav>
 
     <!-- Controls -->
