@@ -409,6 +409,7 @@
         }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .splash{position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#0b1120,#134e4a);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s,visibility 0.5s}.splash.hide{opacity:0;visibility:hidden}.splash img{width:120px;animation:pulse 2s infinite}.splash h2{color:#d4af37;font-family:Amiri,serif;margin-top:20px;font-size:1.8rem}.splash p{color:#5eead4;margin-top:10px}.splash .loader{width:60px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin-top:30px;overflow:hidden}.splash .loader div{height:100%;background:#14b8a6;animation:load 1.5s ease-in-out;border-radius:2px}@keyframes load{0%{width:0}100%{width:100%}}
+.install-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10003;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:16px 24px;border-radius:20px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(0,0,0,0.5);border:1px solid var(--g);max-width:90%;animation:slideUp 0.5s ease}.install-banner.hidden{display:none}.install-banner .icon{font-size:40px}.install-banner .text{flex:1}.install-banner h4{color:var(--g);margin-bottom:4px}.install-banner p{color:var(--l);font-size:0.8rem}.install-banner .btns{display:flex;gap:8px}.install-banner .btn-install{background:var(--p);color:#fff;padding:10px 20px;border-radius:25px;border:none;font-weight:700;cursor:pointer;font-family:Cairo,sans-serif}.install-banner .btn-close{background:transparent;color:#888;border:none;font-size:20px;cursor:pointer}@keyframes slideUp{from{transform:translateX(-50%) translateY(100px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
 </style>
 </head>
 <body>
@@ -551,6 +552,18 @@
     <!-- Toast Container -->
     <div id="toast" class="toast"></div>
 
+<div class="install-banner hidden" id="installBanner">
+<div class="icon">🏥</div>
+<div class="text">
+<h4>تثبيت التطبيق</h4>
+<p>أضف IMCI Yemen لشاشتك الرئيسية</p>
+</div>
+<div class="btns">
+<button class="btn-install" id="installBtn" onclick="installPWA()">📲 تثبيت</button>
+<button class="btn-close" onclick="document.getElementById(`installBanner`).classList.add(`hidden`)">✕</button>
+</div>
+</div>
+
     <!-- Footer -->
     <div style="text-align:center;margin:30px 0 10px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
 <a href="https://wa.me/?text=https://kaidngat4-droid.github.io/imci-yemen-platform/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:700;font-size:14px;background:#25D366;color:#fff;box-shadow:0 4px 15px rgba(37,211,102,0.3);">📱 واتساب</a>
@@ -691,7 +704,10 @@ function toggleDark() {
         });
 
         // PWA
-        if ('serviceWorker' in navigator) {
+        let deferredPrompt;
+window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();deferredPrompt=e;document.getElementById("installBanner").classList.remove("hidden");});
+function installPWA(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then((r)=>{document.getElementById("installBanner").classList.add("hidden");deferredPrompt=null;});}}
+if (.serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(() => {});
         }
     })();
